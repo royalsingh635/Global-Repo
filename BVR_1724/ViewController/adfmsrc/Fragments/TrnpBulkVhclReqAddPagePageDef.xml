@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="TrnpBulkVhclReqAddPagePageDef"
+                Package="Fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SlsTrnpBulkVr1" RangeSize="25" DataControl="TrnpBulkVhclReqAMDataControl"
+              id="SlsTrnpBulkVr1Iterator">
+      <sortCriteria>
+        <sort attribute="DispId" ascending="false"/>
+        <sort attribute="DocDt" ascending="false"/>
+        <sort attribute="DocId" ascending="false"/>
+        <sort attribute="TransSoIdSearch" ascending="false"/>
+        <sort attribute="TransCustSearch" ascending="false"/>
+        <sort attribute="TransStDt" ascending="false"/>
+        <sort attribute="TransEndDt" ascending="false"/>
+      </sortCriteria>
+    </iterator>
+    <iterator Binds="SlsTrnpBulkVrSrc1" RangeSize="25" DataControl="TrnpBulkVhclReqAMDataControl"
+              id="SlsTrnpBulkVrSrc1Iterator"/>
+    <iterator Binds="TrnpBulkSoView1" RangeSize="25" DataControl="TrnpBulkVhclReqAMDataControl"
+              id="TrnpBulkSoView1Iterator">
+      <sortCriteria>
+        <sort attribute="TransEoNm" ascending="false"/>
+        <sort attribute="SoId" ascending="false"/>
+      </sortCriteria>
+    </iterator>
+    <iterator Binds="SlsTrnpBulkVrItm1" RangeSize="25" DataControl="TrnpBulkVhclReqAMDataControl"
+              id="SlsTrnpBulkVrItm1Iterator"/>
+    <iterator Binds="DualForDate1" RangeSize="25" DataControl="TrnpBulkVhclReqAMDataControl" id="DualForDate1Iterator"/>
+    <iterator Binds="TrnpBulkTrfViewVO1" RangeSize="25" DataControl="TrnpBulkVhclReqAMDataControl"
+              id="TrnpBulkTrfViewVO1Iterator"/>
+    <iterator Binds="TrnpBulkTransferNewVo1" RangeSize="25" DataControl="TrnpBulkVhclReqAMDataControl"
+              id="TrnpBulkTransferNewVo1Iterator"/>
+    <iterator Binds="SlsTrnpBulkVrSummVO1" RangeSize="25" DataControl="TrnpBulkVhclReqAMDataControl"
+              id="SlsTrnpBulkVrSummVO1Iterator"/>
+    <iterator Binds="SlsTrnpBulkVrItmVO2" RangeSize="25" DataControl="TrnpBulkVhclReqAMDataControl"
+              id="SlsTrnpBulkVrItmVO2Iterator"/>
+  </executables>
+  <bindings>
+    <listOfValues IterBinding="SlsTrnpBulkVr1Iterator" StaticList="false" Uses="LOV_TransSoIdSearch"
+                  id="TransSoIdSearch"/>
+    <listOfValues IterBinding="SlsTrnpBulkVr1Iterator" StaticList="false" Uses="LOV_TransCustSearch"
+                  id="TransCustSearch"/>
+    <listOfValues IterBinding="SlsTrnpBulkVr1Iterator" StaticList="false" Uses="LOV_TransItemSearch"
+                  id="TransItemSearch"/>
+    <button IterBinding="SlsTrnpBulkVrSrc1Iterator" id="TransChkSelectOrd" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="TransChkSelectOrd"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <action IterBinding="SlsTrnpBulkVr1Iterator" id="CreateInsert"
+            InstanceName="TrnpBulkVhclReqAMDataControl.SlsTrnpBulkVr1" DataControl="TrnpBulkVhclReqAMDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <tree IterBinding="TrnpBulkSoView1Iterator" id="TrnpBulkSoView1" ChangeEventPolicy="none">
+      <nodeDefinition DefName="trnpbulkvhclreqapp.model.views.TrnpBulkSoViewVO" Name="TrnpBulkSoView10">
+        <AttrNames>
+          <Item Value="SoId"/>
+          <Item Value="TransVhclTyp"/>
+          <Item Value="TransReqTyp"/>
+          <Item Value="TransRoutTyp"/>
+          <Item Value="TransChkSelect" Binds="TransChkSelect"/>
+          <Item Value="DocDt"/>
+          <Item Value="TransEoNm"/>
+          <Item Value="TransGrossWt"/>
+          <Item Value="TransLocNm"/>
+          <Item Value="AddsLoc"/>
+          <Item Value="Adds"/>
+          <Item Value="ShipAdds"/>
+          <Item Value="DlvDt"/>
+          <Item Value="TransBalanceWt"/>
+          <Item Value="CbmVal"/>
+          <Item Value="SalesItmQty"/>
+          <Item Value="TotAmtBs"/>
+          <Item Value="ExpFlag"/>
+          <Item Value="TransWhName"/>
+          <Item Value="CashCustNm"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="TrnpBulkSoView1Iterator" id="TransChkSelect" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="TransChkSelect"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="searchBulkSo" RequiresUpdateModel="true" Action="invokeMethod" MethodName="searchBulkSo"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.searchBulkSo_TrnpBulkVhclReqAMDataControl_dataProvider_searchBulkSo_result"/>
+    <methodAction id="resetBulkSo" RequiresUpdateModel="true" Action="invokeMethod" MethodName="resetBulkSo"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.resetBulkSo_TrnpBulkVhclReqAMDataControl_dataProvider_resetBulkSo_result"/>
+    <tree IterBinding="SlsTrnpBulkVrItm1Iterator" id="SlsTrnpBulkVrItm1">
+      <nodeDefinition DefName="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrItmVO" Name="SlsTrnpBulkVrItm10">
+        <AttrNames>
+          <Item Value="ItmFlag"/>
+          <Item Value="TransItmNm"/>
+          <Item Value="TransColorAttNm"/>
+          <Item Value="TransUomNm"/>
+          <Item Value="DlvQty"/>
+          <Item Value="TotQty"/>
+          <Item Value="AvlStk"/>
+          <Item Value="UnpstdStk"/>
+          <Item Value="WipStk"/>
+          <Item Value="DlvDt"/>
+          <Item Value="SchdlDt"/>
+          <Item Value="TransBalanceStk"/>
+          <Item Value="ItmCbm"/>
+          <Item Value="TransWareHouse"/>
+          <Item Value="TransItemSelected" Binds="TransItemSelected"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" DataControl="TrnpBulkVhclReqAMDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="TransTotalGrossWt">
+      <AttrNames>
+        <Item Value="TransTotalGrossWt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SlsTrnpBulkVrSrc1Iterator" id="DocId">
+      <AttrNames>
+        <Item Value="DocId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="SlsTrnpBulkVrSrc1Iterator" id="SlsTrnpBulkVrSrc1">
+      <nodeDefinition DefName="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrSrcVO" Name="SlsTrnpBulkVrSrc10">
+        <AttrNames>
+          <Item Value="GrossWt"/>
+          <Item Value="SrcDocDt"/>
+          <Item Value="TransSoId"/>
+          <Item Value="TransEoNm"/>
+          <Item Value="TransRoutNm"/>
+          <Item Value="TransVhclTyp"/>
+          <Item Value="TransReqTyp"/>
+          <Item Value="TransLocNm"/>
+          <Item Value="DocId"/>
+          <Item Value="SrcDocId"/>
+          <Item Value="TransShipAdds"/>
+          <Item Value="TransBalanceWt"/>
+          <Item Value="TotBndl"/>
+          <Item Value="TotAmt"/>
+          <Item Value="TransWhName"/>
+          <Item Value="VhclNo"/>
+          <Item Value="ReqTyp"/>
+          <Item Value="OldVhclNo"/>
+          <Item Value="TransCageName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <listOfValues IterBinding="SlsTrnpBulkVr1Iterator" StaticList="false" Uses="LOV_TransRouteName"
+                  id="TransRouteName"/>
+    <listOfValues IterBinding="SlsTrnpBulkVr1Iterator" StaticList="false" Uses="LOV_TransVhclType" id="TransVhclType"/>
+    <list IterBinding="SlsTrnpBulkVr1Iterator" StaticList="false" Uses="LOV_TransReqType" id="TransReqType"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="addListOfOrders" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addListOfOrders"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.addListOfOrders_TrnpBulkVhclReqAMDataControl_dataProvider_addListOfOrders_result"/>
+    <methodAction id="getSoList" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getSoList"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.getSoList_TrnpBulkVhclReqAMDataControl_dataProvider_getSoList_result"/>
+    <methodAction id="populateItemDetail" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="populateItemDetail" IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.populateItemDetail_TrnpBulkVhclReqAMDataControl_dataProvider_populateItemDetail_result"/>
+    <listOfValues IterBinding="SlsTrnpBulkVr1Iterator" StaticList="false" Uses="LOV_TransLocNm" id="TransLocNm"/>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="DispId">
+      <AttrNames>
+        <Item Value="DispId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="UsrIdCreateDt">
+      <AttrNames>
+        <Item Value="UsrIdCreateDt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="DrftDispId">
+      <AttrNames>
+        <Item Value="DrftDispId"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" DataControl="TrnpBulkVhclReqAMDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="TransUsrNm">
+      <AttrNames>
+        <Item Value="TransUsrNm"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="createInsertSoBulkHdr" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createInsertSoBulkHdr" IsViewObjectMethod="false"
+                  DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.createInsertSoBulkHdr_TrnpBulkVhclReqAMDataControl_dataProvider_createInsertSoBulkHdr_result"/>
+    <methodAction id="validateReqValue" RequiresUpdateModel="true" Action="invokeMethod" MethodName="validateReqValue"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.validateReqValue_TrnpBulkVhclReqAMDataControl_dataProvider_validateReqValue_result"/>
+    <methodAction id="generateBulkRequest" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="generateBulkRequest" IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.generateBulkRequest_TrnpBulkVhclReqAMDataControl_dataProvider_generateBulkRequest_result"/>
+    <listOfValues IterBinding="TrnpBulkSoView1Iterator" StaticList="false" Uses="LOV_TransRoutTyp" id="TransRoutTyp"/>
+    <action IterBinding="SlsTrnpBulkVrItm1Iterator" id="Delete"
+            InstanceName="TrnpBulkVhclReqAMDataControl.SlsTrnpBulkVrItm1" DataControl="TrnpBulkVhclReqAMDataControl"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <button IterBinding="SlsTrnpBulkVr1Iterator" id="Freeze" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Freeze"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="validateItemDetails" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="validateItemDetails" IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.validateItemDetails_TrnpBulkVhclReqAMDataControl_dataProvider_validateItemDetails_result"/>
+    <methodAction id="deleteSalesOrderSrc" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="deleteSalesOrderSrc" IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.deleteSalesOrderSrc_TrnpBulkVhclReqAMDataControl_dataProvider_deleteSalesOrderSrc_result">
+      <NamedData NDName="SrcDocId" NDType="java.lang.String"/>
+    </methodAction>
+    <action IterBinding="SlsTrnpBulkVrSrc1Iterator" id="Delete1"
+            InstanceName="TrnpBulkVhclReqAMDataControl.SlsTrnpBulkVrSrc1" DataControl="TrnpBulkVhclReqAMDataControl"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <methodAction id="getFreezeVal" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getFreezeVal"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.getFreezeVal_TrnpBulkVhclReqAMDataControl_dataProvider_getFreezeVal_result"/>
+    <listOfValues IterBinding="SlsTrnpBulkVr1Iterator" StaticList="false" Uses="LOV_TransCurrDesc" id="TransCurrDesc"/>
+    <methodAction id="validateHdrBulkVr" RequiresUpdateModel="true" Action="invokeMethod" MethodName="validateHdrBulkVr"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.validateHdrBulkVr_TrnpBulkVhclReqAMDataControl_dataProvider_validateHdrBulkVr_result"/>
+    <methodAction id="getTotalGrossWtVal" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getTotalGrossWtVal" IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.getTotalGrossWtVal_TrnpBulkVhclReqAMDataControl_dataProvider_getTotalGrossWtVal_result"/>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="TransStDt">
+      <AttrNames>
+        <Item Value="TransStDt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="TransEndDt">
+      <AttrNames>
+        <Item Value="TransEndDt"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="SlsTrnpBulkVr1Iterator" StaticList="false" Uses="LOV_TransLocNmSrch"
+                  id="TransLocNmSrch"/>
+    <methodAction id="showShipAddFeature" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="showShipAddFeature" IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.showShipAddFeature_TrnpBulkVhclReqAMDataControl_dataProvider_showShipAddFeature_result"/>
+    <methodAction id="amendVhclSchdl" RequiresUpdateModel="true" Action="invokeMethod" MethodName="amendVhclSchdl"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.amendVhclSchdl_TrnpBulkVhclReqAMDataControl_dataProvider_amendVhclSchdl_result"/>
+    <methodAction id="cancelOldBulkRequest" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="cancelOldBulkRequest" IsViewObjectMethod="false"
+                  DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.cancelOldBulkRequest_TrnpBulkVhclReqAMDataControl_dataProvider_cancelOldBulkRequest_result"/>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="LrStatus">
+      <AttrNames>
+        <Item Value="LrStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="TransLrStatus">
+      <AttrNames>
+        <Item Value="TransLrStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SlsTrnpBulkVr1Iterator" StaticList="false" Uses="LOV_LrStatus" id="LrStatus1"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SlsTrnpBulkVr1Iterator" StaticList="false" Uses="LOV_DocTypId" id="DocTypId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="DocTypId1">
+      <AttrNames>
+        <Item Value="DocTypId"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SlsTrnpBulkVr1Iterator" StaticList="false" Uses="LOV_TransDocTyp" id="TransDocTyp"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="executeBulkLr" RequiresUpdateModel="true" Action="invokeMethod" MethodName="executeBulkLr"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.executeBulkLr_TrnpBulkVhclReqAMDataControl_dataProvider_executeBulkLr_result"/>
+    <methodAction id="getTotalBalanceWtVal" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getTotalBalanceWtVal" IsViewObjectMethod="false"
+                  DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.getTotalBalanceWtVal_TrnpBulkVhclReqAMDataControl_dataProvider_getTotalBalanceWtVal_result"/>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="TransTotalBalanceWt">
+      <AttrNames>
+        <Item Value="TransTotalBalanceWt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="Freeze1">
+      <AttrNames>
+        <Item Value="Freeze"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SlsTrnpBulkVrItm1Iterator" id="TransTotalCBM">
+      <AttrNames>
+        <Item Value="TransTotalCBM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="VhclNo" ChangeEventPolicy="none">
+      <AttrNames>
+        <Item Value="VhclNo"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="removeItemFromVr" RequiresUpdateModel="true" Action="invokeMethod" MethodName="removeItemFromVr"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.removeItemFromVr_TrnpBulkVhclReqAMDataControl_dataProvider_removeItemFromVr_result">
+      <NamedData NDName="type" NDType="java.lang.String"/>
+    </methodAction>
+    <button IterBinding="SlsTrnpBulkVrItm1Iterator" id="TransSelectAll" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="TransSelectAll"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="getWfNo" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getWfNo"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.getWfNo_TrnpBulkVhclReqAMDataControl_dataProvider_getWfNo_result"/>
+    <methodAction id="currUsrLvl" RequiresUpdateModel="true" Action="invokeMethod" MethodName="currUsrLvl"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.currUsrLvl_TrnpBulkVhclReqAMDataControl_dataProvider_currUsrLvl_result">
+      <NamedData NDName="WfNum" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="getWfNo1" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getWfNo"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.getWfNo_TrnpBulkVhclReqAMDataControl_dataProvider_getWfNo_result"/>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="TransVrMode">
+      <AttrNames>
+        <Item Value="TransVrMode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="VrMode">
+      <AttrNames>
+        <Item Value="VrMode"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="insertIntoWF" RequiresUpdateModel="true" Action="invokeMethod" MethodName="insertIntoWF"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.insertIntoWF_TrnpBulkVhclReqAMDataControl_dataProvider_insertIntoWF_result">
+      <NamedData NDName="wfId" NDType="java.lang.String"/>
+      <NamedData NDName="lvlFrm" NDType="java.lang.Integer"/>
+      <NamedData NDName="lvlTo" NDType="java.lang.Integer"/>
+      <NamedData NDName="action" NDType="java.lang.String"/>
+      <NamedData NDName="remark" NDType="java.lang.String"/>
+      <NamedData NDName="amount" NDType="oracle.jbo.domain.Number"/>
+    </methodAction>
+    <button IterBinding="SlsTrnpBulkVrItm1Iterator" id="ItmFlag" DTSupportsMRU="false" StaticList="true"
+            ChangeEventPolicy="none">
+      <AttrNames>
+        <Item Value="ItmFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="getUsrNm" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getUsrNm"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.getUsrNm_TrnpBulkVhclReqAMDataControl_dataProvider_getUsrNm_result">
+      <NamedData NDName="usrId" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="chkPendingUsr" RequiresUpdateModel="true" Action="invokeMethod" MethodName="chkPendingUsr"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.chkPendingUsr_TrnpBulkVhclReqAMDataControl_dataProvider_chkPendingUsr_result"/>
+    <methodAction id="selectAllDoc" RequiresUpdateModel="true" Action="invokeMethod" MethodName="selectAllDoc"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.selectAllDoc_TrnpBulkVhclReqAMDataControl_dataProvider_selectAllDoc_result">
+      <NamedData NDName="action" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="selectAllItem" RequiresUpdateModel="true" Action="invokeMethod" MethodName="selectAllItem"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.selectAllItem_TrnpBulkVhclReqAMDataControl_dataProvider_selectAllItem_result">
+      <NamedData NDName="action" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="DualForDate1Iterator" id="TransSchlDt">
+      <AttrNames>
+        <Item Value="TransSchlDt"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="updateSchlDt" RequiresUpdateModel="true" Action="invokeMethod" MethodName="updateSchlDt"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.updateSchlDt_TrnpBulkVhclReqAMDataControl_dataProvider_updateSchlDt_result"/>
+    <attributeValues IterBinding="DualForDate1Iterator" id="TransCurDt">
+      <AttrNames>
+        <Item Value="TransCurDt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="TransLrDtls">
+      <AttrNames>
+        <Item Value="TransLrDtls"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="TransTotalBundle">
+      <AttrNames>
+        <Item Value="TransTotalBundle"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="getTotalBundleVal" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getTotalBundleVal"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.getTotalBundleVal_TrnpBulkVhclReqAMDataControl_dataProvider_getTotalBundleVal_result"/>
+    <methodAction id="getTotalAmount" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getTotalAmount"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.getTotalAmount_TrnpBulkVhclReqAMDataControl_dataProvider_getTotalAmount_result"/>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="TransTotalAmt">
+      <AttrNames>
+        <Item Value="TransTotalAmt"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="SlsTrnpBulkVr1Iterator" StaticList="false" Uses="LOV_TransGroupNm" id="TransGroupNm"/>
+    <listOfValues IterBinding="SlsTrnpBulkVr1Iterator" StaticList="false" Uses="LOV_TransCageName" id="TransCageName"/>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="TransReqTypeId">
+      <AttrNames>
+        <Item Value="TransReqTypeId"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="SlsTrnpBulkVrSrc1Iterator" StaticList="false" Uses="LOV_TransVhclName"
+                  id="TransVhclName"/>
+    <methodAction id="checkVehicle" RequiresUpdateModel="true" Action="invokeMethod" MethodName="checkVehicle"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.checkVehicle_TrnpBulkVhclReqAMDataControl_dataProvider_checkVehicle_result"/>
+    <methodAction id="checkStockDetails" RequiresUpdateModel="true" Action="invokeMethod" MethodName="checkStockDetails"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.checkStockDetails_TrnpBulkVhclReqAMDataControl_dataProvider_checkStockDetails_result"/>
+    <methodAction id="checkSrcVo" RequiresUpdateModel="true" Action="invokeMethod" MethodName="checkSrcVo"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.checkSrcVo_TrnpBulkVhclReqAMDataControl_dataProvider_checkSrcVo_result"/>
+    <methodAction id="saveBulkLrAction" RequiresUpdateModel="true" Action="invokeMethod" MethodName="saveBulkLrAction"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.saveBulkLrAction_TrnpBulkVhclReqAMDataControl_dataProvider_saveBulkLrAction_result"/>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="TransTotalCbmVal">
+      <AttrNames>
+        <Item Value="TransTotalCbmVal"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="refrshStk" RequiresUpdateModel="true" Action="invokeMethod" MethodName="refrshStk"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.refrshStk_TrnpBulkVhclReqAMDataControl_dataProvider_refrshStk_result"/>
+    <attributeValues IterBinding="SlsTrnpBulkVr1Iterator" id="AmdNo">
+      <AttrNames>
+        <Item Value="AmdNo"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="chkVhclNoSchdlStat" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="chkVhclNoSchdlStat" IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.chkVhclNoSchdlStat_TrnpBulkVhclReqAMDataControl_dataProvider_chkVhclNoSchdlStat_result">
+      <NamedData NDName="vhclNo" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="chkCageStatus" RequiresUpdateModel="true" Action="invokeMethod" MethodName="chkCageStatus"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.chkCageStatus_TrnpBulkVhclReqAMDataControl_dataProvider_chkCageStatus_result"/>
+    <listOfValues IterBinding="DualForDate1Iterator" StaticList="false" Uses="LOV_TransVhclNo" id="TransVhclNo"/>
+    <methodAction id="popVehicle" RequiresUpdateModel="true" Action="invokeMethod" MethodName="popVehicle"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.popVehicle_TrnpBulkVhclReqAMDataControl_dataProvider_popVehicle_result"/>
+    <attributeValues IterBinding="DualForDate1Iterator" id="TransCustVhclNo">
+      <AttrNames>
+        <Item Value="TransCustVhclNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualForDate1Iterator" id="TransOwnershipTyp">
+      <AttrNames>
+        <Item Value="TransOwnershipTyp"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="catgIdFrmEoId" RequiresUpdateModel="true" Action="invokeMethod" MethodName="catgIdFrmEoId"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.catgIdFrmEoId_TrnpBulkVhclReqAMDataControl_dataProvider_catgIdFrmEoId_result"/>
+    <methodAction id="validateBulkVr" RequiresUpdateModel="true" Action="invokeMethod" MethodName="validateBulkVr"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.validateBulkVr_TrnpBulkVhclReqAMDataControl_dataProvider_validateBulkVr_result"/>
+    <methodAction id="populateRptData" RequiresUpdateModel="true" Action="invokeMethod" MethodName="populateRptData"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.populateRptData_TrnpBulkVhclReqAMDataControl_dataProvider_populateRptData_result">
+      <NamedData NDName="linkId" NDType="java.lang.String"/>
+    </methodAction>
+    <button IterBinding="TrnpBulkTrfViewVO1Iterator" id="TransChkSelect1" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="TransChkSelect"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="selectAllDocTrf" RequiresUpdateModel="true" Action="invokeMethod" MethodName="selectAllDocTrf"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.selectAllDocTrf_TrnpBulkVhclReqAMDataControl_dataProvider_selectAllDocTrf_result">
+      <NamedData NDName="action" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="getTrfList" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getTrfList"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.getTrfList_TrnpBulkVhclReqAMDataControl_dataProvider_getTrfList_result"/>
+    <tree IterBinding="TrnpBulkTransferNewVo1Iterator" id="TrnpBulkTransferNewVo1">
+      <nodeDefinition DefName="trnpbulkvhclreqapp.model.views.TrnpBulkTransferNewVo" Name="TrnpBulkTransferNewVo10">
+        <AttrNames>
+          <Item Value="TrfNo"/>
+          <Item Value="WhIdDest"/>
+          <Item Value="DocDt"/>
+          <Item Value="LrBalQty"/>
+          <Item Value="TransChkSelect"/>
+          <Item Value="TransDocSelect" Binds="TransDocSelect"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="SlsTrnpBulkVrSummVO1Iterator" id="SlsTrnpBulkVrSummVO1">
+      <nodeDefinition DefName="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrSummVO" Name="SlsTrnpBulkVrSummVO10">
+        <AttrNames>
+          <Item Value="TransBTONo"/>
+          <Item Value="TransCageName"/>
+          <Item Value="TransReqTyp"/>
+          <Item Value="TransVhclNo"/>
+          <Item Value="TransOldVhclNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="SlsTrnpBulkVrItmVO2Iterator" id="SlsTrnpBulkVrItmVO2">
+      <nodeDefinition DefName="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrItmVO" Name="SlsTrnpBulkVrItmVO20">
+        <AttrNames>
+          <Item Value="TransItemSelected"/>
+          <Item Value="TransItmNm"/>
+          <Item Value="TransColorAttNm"/>
+          <Item Value="TransUomNm"/>
+          <Item Value="DlvQty"/>
+          <Item Value="TotQty"/>
+          <Item Value="AvlStk"/>
+          <Item Value="DlvDt"/>
+          <Item Value="SchdlDt"/>
+          <Item Value="TransWareHouse"/>
+          <Item Value="ItmFlag" Binds="ItmFlag1"/>
+          <Item Value="TransItemSelectChk" Binds="TransItemSelectChk"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="TrnpBulkTransferNewVo1Iterator" id="TransDocSelect" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="TransDocSelect"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <button IterBinding="SlsTrnpBulkVrItm1Iterator" id="TransItemSelected" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="TransItemSelected"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <button IterBinding="SlsTrnpBulkVrItmVO2Iterator" id="ItmFlag1" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ItmFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="SlsTrnpBulkVrItmVO2Iterator" id="TransItemSelectChk" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="TransItemSelectChk"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <methodAction id="selectAllVRItem" RequiresUpdateModel="true" Action="invokeMethod" MethodName="selectAllVRItem"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.selectAllVRItem_TrnpBulkVhclReqAMDataControl_dataProvider_selectAllVRItem_result">
+      <NamedData NDName="action" NDType="java.lang.String"/>
+    </methodAction>
+    <list IterBinding="SlsTrnpBulkVr1Iterator" StaticList="false" Uses="LOV_TrfType" id="TrfType"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="SlsTrnpBulkVrSrc1Iterator" StaticList="false" Uses="LOV_VhclNo" id="VhclNo1"/>
+    <methodAction id="getLoadingStatus" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getLoadingStatus"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.getLoadingStatus_TrnpBulkVhclReqAMDataControl_dataProvider_getLoadingStatus_result"/>
+  </bindings>
+</pageDefinition>

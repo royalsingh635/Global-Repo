@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.1.3.10.8" id="DataBindings"
+             SeparateXMLFiles="false" Package="trnpbulkvhclreqapp.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/Fragments/TrnpBulkVhclReqAddPage.jsff"
+          usageId="trnpbulkvhclreqapp_view_TrnpBulkVhclReqAddPagePageDef"/>
+    <page path="/Fragments/TrnpBulkVhclReqSrchPage.jsff"
+          usageId="trnpbulkvhclreqapp_view_TrnpBulkVhclReqSrchPagePageDef"/>
+    <page path="/WEB-INF/TrnpBulkVhclReqTF.xml#TrnpBulkVhclReqTF@setSelectDocIdOnViewPage"
+          usageId="trnpbulkvhclreqapp_view_TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_setSelectDocIdOnViewPagePageDef"/>
+    <page path="/WEB-INF/TrnpBulkVhclReqTF.xml#TrnpBulkVhclReqTF@setnullOnAddPage"
+          usageId="trnpbulkvhclreqapp_view_TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_setnullOnAddPagePageDef"/>
+    <page path="/WEB-INF/TrnpBulkVhclReqTF.xml#TrnpBulkVhclReqTF@createInsertSoBulkHdr"
+          usageId="trnpbulkvhclreqapp_view_TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_createInsertSoBulkHdrPageDef"/>
+    <page path="/WEB-INF/TrnpBulkVhclReqTF.xml#TrnpBulkVhclReqTF@getWfNo"
+          usageId="trnpbulkvhclreqapp_view_TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_getWfNoPageDef"/>
+    <page path="/WEB-INF/TrnpBulkVhclReqTF.xml#TrnpBulkVhclReqTF@wfReturnAction"
+          usageId="trnpbulkvhclreqapp_view_TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_wfReturnActionPageDef"/>
+    <page path="/WEB-INF/TrnpBulkVhclReqTF.xml#TrnpBulkVhclReqTF@rollback"
+          usageId="trnpbulkvhclreqapp_view_TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_rollbackPageDef"/>
+    <page path="/untitled1.jspx" usageId="trnpbulkvhclreqapp_view_untitled1PageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="trnpbulkvhclreqapp_view_TrnpBulkVhclReqAddPagePageDef" path="Fragments.TrnpBulkVhclReqAddPagePageDef"/>
+    <page id="trnpbulkvhclreqapp_view_TrnpBulkVhclReqSrchPagePageDef" path="Fragments.TrnpBulkVhclReqSrchPagePageDef"/>
+    <page id="trnpbulkvhclreqapp_view_TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_setSelectDocIdOnViewPagePageDef"
+          path="trnpbulkvhclreqapp.view.pageDefs.TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_setSelectDocIdOnViewPagePageDef"/>
+    <page id="trnpbulkvhclreqapp_view_TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_setnullOnAddPagePageDef"
+          path="trnpbulkvhclreqapp.view.pageDefs.TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_setnullOnAddPagePageDef"/>
+    <page id="trnpbulkvhclreqapp_view_TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_createInsertSoBulkHdrPageDef"
+          path="trnpbulkvhclreqapp.view.pageDefs.TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_createInsertSoBulkHdrPageDef"/>
+    <page id="trnpbulkvhclreqapp_view_TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_getWfNoPageDef"
+          path="trnpbulkvhclreqapp.view.pageDefs.TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_getWfNoPageDef"/>
+    <page id="trnpbulkvhclreqapp_view_TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_wfReturnActionPageDef"
+          path="trnpbulkvhclreqapp.view.pageDefs.TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_wfReturnActionPageDef"/>
+    <page id="trnpbulkvhclreqapp_view_TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_rollbackPageDef"
+          path="trnpbulkvhclreqapp.view.pageDefs.TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_rollbackPageDef"/>
+    <page id="trnpbulkvhclreqapp_view_untitled1PageDef" path="trnpbulkvhclreqapp.view.pageDefs.untitled1PageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="TrnpBulkVhclReqAMDataControl" Package="trnpbulkvhclreqapp.model.services"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="TrnpBulkVhclReqAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

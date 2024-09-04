@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="TrnpBulkVhclReqTF">
+    <default-activity>rollback</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__2">
+      <name>GLBL_APP_CLD_ID</name>
+      <value>#{pageFlowScope.GLBL_APP_CLD_ID}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__3">
+      <name>GLBL_APP_SERV_LOC</name>
+      <value>#{pageFlowScope.GLBL_APP_SERV_LOC}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__4">
+      <name>GLBL_APP_USR_ORG</name>
+      <value>#{pageFlowScope.GLBL_APP_USR_ORG}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__5">
+      <name>GLBL_HO_ORG_ID</name>
+      <value>#{pageFlowScope.GLBL_HO_ORG_ID}</value>
+      <class>javs.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__6">
+      <name>GLBL_APP_USR</name>
+      <value>#{pageFlowScope.GLBL_APP_USR}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name>DocId</name>
+      <value>#{pageFlowScope.DocId}</value>
+      <class>javs.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__8">
+      <name>Mode</name>
+      <value>#{pageFlowScope.Mode}</value>
+      <class>javs.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__13">
+      <name>GLBL_DT_FORMAT</name>
+      <value>#{pageFlowScope.GLBL_DT_FORMAT}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__14">
+      <name>GLBL_QTY_DIGIT</name>
+      <value>#{pageFlowScope.GLBL_QTY_DIGIT}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__20">
+      <name>GLBL_LANG_ID</name>
+      <value>#{pageFlowScope.GLBL_LANG_ID}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__32">
+      <name>WF_RET_PARAM</name>
+      <value>#{pageFlowScope.WF_RET_PARAM}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__43">
+      <name>WF_ID_PARAM</name>
+      <value>#{pageFlowScope.WF_ID_PARAM}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__46">
+      <name>GLBL_ORG_PROJ_ID</name>
+      <value>#{pageFlowScope.GLBL_ORG_PROJ_ID}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__48">
+      <name>GLBL_AMT_DIGIT</name>
+      <value>#{pageFlowScope.GLBL_AMT_DIGIT}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__52">
+      <name>VHCL_NO</name>
+      <value>#{pageFlowScope.VHCL_NO}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>TrnpBulkVhclReqBean</managed-bean-name>
+      <managed-bean-class>trnpbulkvhclreqapp.view.beans.TrnpBulkVhclReqBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="TrnpBulkVhclReqAddPage">
+      <page>/Fragments/TrnpBulkVhclReqAddPage.jsff</page>
+    </view>
+    <router id="router1">
+      <case id="__9">
+        <expression>#{pageFlowScope.Mode=='V'}</expression>
+        <outcome>V</outcome>
+      </case>
+      <case id="__10">
+        <expression>#{pageFlowScope.Mode=='A'}</expression>
+        <outcome>A</outcome>
+      </case>
+      <default-outcome>A</default-outcome>
+    </router>
+    <method-call id="setSelectDocIdOnViewPage">
+      <method>#{bindings.setSelectDocIdOnViewPage.execute}</method>
+      <outcome>
+        <fixed-outcome>setSelectDocIdOnViewPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <method-call id="setnullOnAddPage">
+      <method>#{bindings.setnullOnAddPage.execute}</method>
+      <outcome>
+        <fixed-outcome>setnullOnAddPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="createInsertSoBulkHdr">
+      <method>#{bindings.createInsertSoBulkHdr.execute}</method>
+      <outcome>
+        <fixed-outcome>createInsertSoBulkHdr</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="WFServTF">
+      <task-flow-reference>
+        <document>/WEB-INF/WFServTF.xml</document>
+        <id>WFServTF</id>
+      </task-flow-reference>
+      <input-parameter id="__33">
+        <name>GLBL_APP_USR</name>
+        <value>#{pageFlowScope.GLBL_APP_USR}</value>
+      </input-parameter>
+      <input-parameter id="__34">
+        <name>GLBL_APP_USR_ORG</name>
+        <value>#{pageFlowScope.GLBL_APP_USR_ORG}</value>
+      </input-parameter>
+      <input-parameter id="__35">
+        <name>GLBL_APP_SERV_LOC</name>
+        <value>#{pageFlowScope.GLBL_APP_SERV_LOC}</value>
+      </input-parameter>
+      <input-parameter id="__36">
+        <name>GLBL_APP_CLD_ID</name>
+        <value>#{pageFlowScope.GLBL_APP_CLD_ID}</value>
+      </input-parameter>
+      <input-parameter id="__37">
+        <name>Doc_id</name>
+        <value>24266</value>
+      </input-parameter>
+      <input-parameter id="__38">
+        <name>Amount</name>
+        <value>0</value>
+      </input-parameter>
+      <input-parameter id="__39">
+        <name>Doc_type_id</name>
+        <value>0</value>
+      </input-parameter>
+      <input-parameter id="__40">
+        <name>GLBL_LANG_ID</name>
+        <value>#{pageFlowScope.GLBL_LANG_ID}</value>
+      </input-parameter>
+      <input-parameter id="__41">
+        <name>GLBL_ORG_PROJ_ID</name>
+        <value>#{pageFlowScope.GLBL_ORG_PROJ_ID}</value>
+      </input-parameter>
+      <input-parameter id="__42">
+        <name>GLBL_AMT_DIGIT</name>
+        <value>#{pageFlowScope.GLBL_AMT_DIGIT}</value>
+      </input-parameter>
+      <input-parameter id="__44">
+        <name>WF_ID</name>
+        <value>#{pageFlowScope.WF_ID_PARAM}</value>
+      </input-parameter>
+      <input-parameter id="__45">
+        <name>Doc_txn_id</name>
+        <value>#{data.trnpbulkvhclreqapp_view_TrnpBulkVhclReqAddPagePageDef.DocId.inputValue}</value>
+      </input-parameter>
+      <return-value id="__47">
+        <name>Action</name>
+        <value>#{pageFlowScope.WF_RET_PARAM}</value>
+      </return-value>
+    </task-flow-call>
+    <method-call id="getWfNo">
+      <method>#{bindings.getWfNo.execute}</method>
+      <return-value>#{pageFlowScope.WF_ID_PARAM}</return-value>
+      <outcome>
+        <fixed-outcome>getWfNo</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="wfReturnAction">
+      <method>#{bindings.wfReturnAction.execute}</method>
+      <outcome>
+        <fixed-outcome>wfReturnAction</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="rollback">
+      <method>#{bindings.rollback.execute}</method>
+      <outcome>
+        <fixed-outcome>rollback</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__11">
+      <from-activity-id>router1</from-activity-id>
+      <control-flow-case id="__12">
+        <from-outcome>A</from-outcome>
+        <to-activity-id>setnullOnAddPage</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__15">
+        <from-outcome>V</from-outcome>
+        <to-activity-id>setSelectDocIdOnViewPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__16">
+      <from-activity-id>setSelectDocIdOnViewPage</from-activity-id>
+      <control-flow-case id="__17">
+        <from-outcome>setSelectDocIdOnViewPage</from-outcome>
+        <to-activity-id>TrnpBulkVhclReqAddPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__18">
+      <from-activity-id>TrnpBulkVhclReqAddPage</from-activity-id>
+      <control-flow-case id="__19">
+        <from-outcome>Back</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__21">
+        <from-outcome>wayToWorkflow</from-outcome>
+        <to-activity-id>getWfNo</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__22">
+      <from-activity-id>setnullOnAddPage</from-activity-id>
+      <control-flow-case id="__23">
+        <from-outcome>setnullOnAddPage</from-outcome>
+        <to-activity-id>createInsertSoBulkHdr</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__26">
+      <from-activity-id>createInsertSoBulkHdr</from-activity-id>
+      <control-flow-case id="__27">
+        <from-outcome>createInsertSoBulkHdr</from-outcome>
+        <to-activity-id>TrnpBulkVhclReqAddPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__24">
+      <from-activity-id>getWfNo</from-activity-id>
+      <control-flow-case id="__25">
+        <from-outcome>getWfNo</from-outcome>
+        <to-activity-id>WFServTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__28">
+      <from-activity-id>WFServTF</from-activity-id>
+      <control-flow-case id="__29">
+        <from-outcome>taskFlowReturn1</from-outcome>
+        <to-activity-id>wfReturnAction</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__30">
+      <from-activity-id>wfReturnAction</from-activity-id>
+      <control-flow-case id="__31">
+        <from-outcome>wfReturnAction</from-outcome>
+        <to-activity-id>TrnpBulkVhclReqAddPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__49">
+      <from-activity-id>rollback</from-activity-id>
+      <control-flow-case id="__50">
+        <from-outcome>rollback</from-outcome>
+        <to-activity-id>router1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

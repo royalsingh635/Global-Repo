@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="LovSODispIdVO"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  FetchSize="500">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="trnpbulkvhclreqapp.model.views.LovSODispIdVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="bindCldId"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="bindSlocId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="bindOrgId"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="bindHoOrgId"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="bindDocId"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[select cld_id,             
+sloc_id,             
+org_id,             
+ho_org_id,             
+doc_id,             
+so_id,     
+2341 as BVRType     
+from             
+sls.sls$so         
+where            
+cld_id = :bindCldId and            
+sloc_id = :bindSlocId and            
+org_id = :bindOrgId and            
+ho_org_id = :bindHoOrgId and            
+-- DOC_ID = nvl(:bindDocId,doc_id)           
+DOC_ID in (           
+select DISTINCT(DOC_ID) from sls.sls$so$dlv$schdl           
+where CLD_ID = :bindCldId           
+AND SLOC_ID = :bindSlocId           
+AND ORG_ID = :bindOrgId           
+AND HO_ORG_ID = :bindHoOrgId           
+AND DOC_ID = nvl(:bindDocId,doc_id)             
+)           
+UNION ALL      
+select A.cld_id,             
+A.sloc_id,             
+A.org_id,       
+'01',      
+A.doc_id,             
+A.TRF_NO,     
+5237 as BVRType    
+from             
+MM.MM$TRF$ORD$BULK  A      
+where            
+A.cld_id = :bindCldId and            
+A.sloc_id = :bindSlocId and            
+A.org_id = :bindOrgId and            
+EXISTS (SELECT 1 FROM MM.MM$TRF$ORD WHERE DOC_ID_SRC=A.DOC_ID AND CLD_ID=A.CLD_ID AND SLOC_ID=A.SLOC_ID AND ORG_ID=A.ORG_ID) 
+/** 
+* Added by : Manjeet Singh 
+* Modified on : 08-12-2022 
+* Remarks : This query is modified for bring BTO id '. 
+* TMS ID : 132314 
+**/]]></SQLQuery>
+  <ViewAttribute
+    Name="CldId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CLD_ID"
+    Expression="CLD_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SlocId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SLOC_ID"
+    Expression="SLOC_ID"
+    SQLType="INTEGER">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrgId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORG_ID"
+    Expression="ORG_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HoOrgId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HO_ORG_ID"
+    Expression="HO_ORG_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DocId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="40"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DOC_ID"
+    Expression="DOC_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SoId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SO_ID"
+    Expression="SO_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <LABEL
+          ResId="trnpbulkvhclreqapp.model.views.LovSODispIdVO.SoId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Bvrtype"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BVRTYPE"
+    Expression="BVRTYPE"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="trnpbulkvhclreqapp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

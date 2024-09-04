@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8"
+                id="TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_createInsertSoBulkHdrPageDef"
+                Package="trnpbulkvhclreqapp.view.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="createInsertSoBulkHdr" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createInsertSoBulkHdr" IsViewObjectMethod="false"
+                  DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.createInsertSoBulkHdr_TrnpBulkVhclReqAMDataControl_dataProvider_createInsertSoBulkHdr_result"/>
+  </bindings>
+</pageDefinition>

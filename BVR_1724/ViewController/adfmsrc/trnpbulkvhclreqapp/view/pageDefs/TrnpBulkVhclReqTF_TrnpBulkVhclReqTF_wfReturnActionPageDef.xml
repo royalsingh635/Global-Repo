@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8"
+                id="TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_wfReturnActionPageDef"
+                Package="trnpbulkvhclreqapp.view.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="wfReturnAction" RequiresUpdateModel="true" Action="invokeMethod" MethodName="wfReturnAction"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.wfReturnAction_TrnpBulkVhclReqAMDataControl_dataProvider_wfReturnAction_result">
+      <NamedData NDName="mode" NDValue="#{pageFlowScope.WF_RET_PARAM}" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

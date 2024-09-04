@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="LovEoId"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  ComponentClass="trnpbulkvhclreqapp.model.views.LovEoIdImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|Prog"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="trnpbulkvhclreqapp.model.views.LovEoId_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="BindAlwOnHold"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="cldIdBind"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="slocIdBind"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="hoOrgIdBind"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="orgIdBind"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="BindUsrId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="bhavIdBind"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="ftrCustPerOrdCatgBind"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="SoTypeBind"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="SoSubTypeId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="BindEoNm"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT  A.EO_TYPE, A.EO_ID EO_ID,  
+A.EO_NM EO_NM 
+FROM APP.APP$EO A, APP.APP$EO$ORG C, APP.APP$EO$PRF B, APP.APP$EE$PRF$SUB$TYPE D  
+WHERE A.EO_CLD_ID = C.CLD_ID  
+AND A.EO_SLOC_ID = C.SLOC_ID  
+AND A.EO_HO_ORG_ID = C.HO_ORG_ID  
+AND A.EO_ID = C.EO_ID  
+AND C.EO_ORG_ACTV = 'Y'  
+AND A.EO_CLD_ID = B.EO_CLD_ID  
+AND A.EO_SLOC_ID = B.EO_SLOC_ID  
+AND A.EO_HO_ORG_ID = B.EO_HO_ORG_ID  
+AND A.EO_ID = B.EO_ID  
+AND A.EO_TYPE = B.EO_TYPE  
+AND D.EE_CLD_ID = A.EO_CLD_ID  
+AND D.EE_SLOC_ID = A.EO_SLOC_ID  
+AND NVL(A.CATG_ID, 339) = D.EE_SUB_TYPE_ID  
+AND NVL (A.EO_ACTV, 'N') = 'Y'  
+AND NVL (B.BLACK_LISTED, 'N') = 'N'  
+and CASE :BindAlwOnHold WHEN 'Y' THEN 'N' ELSE NVL (B.ON_HOLD, 'N') END = 'N'  
+AND A.EO_TYPE IN (68, 81)  
+AND A.EO_CLD_ID = :cldIdBind  
+AND A.EO_SLOC_ID = :slocIdBind  
+AND A.EO_HO_ORG_ID = :hoOrgIdBind  
+AND c.ORG_ID = :orgIdBind  
+AND A.EO_CATG_BP_ID IN (SELECT E.EE_SUB_TYPE_ID  
+FROM APP.APP$EE$PRF$SUB$TYPE E  
+WHERE E.EE_CLD_ID = :cldIdBind  
+AND E.EE_SLOC_ID = :slocIdBind  
+AND E.EE_SUB_TYPE_ID IS NOT NULL  
+AND E.EE_SUB_TYPE_ACTV = 'Y'  
+START WITH E.PARNT_SUB_TYP_ID IN  
+(SELECT F.BP_ID  
+FROM APP.APP$BP$USR$MAP F  
+WHERE F.USR_ID = NVL(:BindUsrId, F.USR_ID)  
+AND F.CLD_ID = :cldIdBind  
+AND F.SLOC_ID = :slocIdBind  
+AND F.HO_ORG_ID = :hoOrgIdBind  
+)  
+CONNECT BY PRIOR E.EE_SUB_TYPE_ID = E.PARNT_SUB_TYP_ID  
+AND PRIOR E.EE_SLOC_ID = E.EE_SLOC_ID  
+union all  
+SELECT F.BP_ID EE_SUB_TYPE_ID  
+FROM APP.APP$BP$USR$MAP F  
+WHERE F.USR_ID = NVL(:BindUsrId, F.USR_ID)  
+AND F.CLD_ID = :cldIdBind  
+AND F.SLOC_ID = :slocIdBind  
+AND F.HO_ORG_ID = :hoOrgIdBind)  
+AND D.EE_SUB_TYPE_BHAV = NVL(:bhavIdBind, EE_SUB_TYPE_BHAV)  
+AND EXISTS  
+(  
+SELECT 1  
+FROM DUAL  
+WHERE  
+:ftrCustPerOrdCatgBind = 'N'  
+UNION ALL  
+SELECT 1  
+FROM APP.APP$EO$DOC$DTL Z  
+WHERE Z.EO_CLD_ID = :cldIdBind  
+AND Z.EO_SLOC_ID = :slocIdBind  
+AND Z.EO_HO_ORG_ID = :hoOrgIdBind  
+AND Z.DOC_TYPE_ID = :SoTypeBind  
+AND Z.DOC_ID = 21503  
+AND Z.DOC_SUB_TYP_ID = :SoSubTypeId  
+AND Z.Eo_id = A.EO_ID  
+AND :ftrCustPerOrdCatgBind = 'Y'  
+)]]></SQLQuery>
+  <ViewAttribute
+    Name="EoType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="EO_TYPE"
+    Expression="EO_TYPE"
+    SQLType="INTEGER">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EoId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="EO_ID"
+    Expression="EO_ID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EoNm"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="250"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EO_NM"
+    Expression="EO_NM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="trnpbulkvhclreqapp.model.views.LovEoId.EoNm_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="LovEoIdCriteria"
+    ViewObjectName="trnpbulkvhclreqapp.model.views.LovEoId"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="LovEoIdCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="EoNm"
+        ViewAttribute="EoNm"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Value=":BindEoNm"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="trnpbulkvhclreqapp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

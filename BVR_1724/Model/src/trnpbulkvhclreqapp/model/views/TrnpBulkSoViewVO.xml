@@ -1,0 +1,1122 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TrnpBulkSoViewVO"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  RowClass="trnpbulkvhclreqapp.model.views.TrnpBulkSoViewVORowImpl"
+  FetchMode="FETCH_ALL"
+  FetchSize="25">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="trnpbulkvhclreqapp.model.views.TrnpBulkSoViewVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="bindOrgId"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="bindHoOrgid"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="bindSlocId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+    <Variable
+    Name="bindCurrId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="bindCldId"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="bindDocId"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="bindEoId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="BindItmId"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="BindStDt"
+    Kind="where"
+    Type="java.sql.Timestamp">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="BindEndDt"
+    Kind="where"
+    Type="java.sql.Timestamp">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="BindLocId"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="BINDDOCSRCTYPE"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="BindRoutId"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="BindEoGroup"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <ViewAccessor
+    Name="LOVReqTypVO1"
+    ViewObjectName="trnpbulkvhclreqapp.model.views.LOVReqTypVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="LOVRouteVO1"
+    ViewObjectName="trnpbulkvhclreqapp.model.views.LOVRouteVO"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="HoOrgIdBind">
+        <TransientExpression
+          trustMode="untrusted"><![CDATA[HoOrgId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="arrPointBind">
+        <TransientExpression
+          trustMode="untrusted"><![CDATA[ArrivalLocId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="cldIdbind">
+        <TransientExpression
+          trustMode="untrusted"><![CDATA[CldId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="orgIdBind">
+        <TransientExpression
+          trustMode="untrusted"><![CDATA[OrgId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="slocIdBind">
+        <TransientExpression
+          trustMode="untrusted"><![CDATA[SlocId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="LOVVhclTypeVO1"
+    ViewObjectName="trnpbulkvhclreqapp.model.views.LOVVhclTypeVO"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="cldIdBind">
+        <TransientExpression
+          trustMode="untrusted"><![CDATA[CldId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="hoOrgIdBind">
+        <TransientExpression
+          trustMode="untrusted"><![CDATA[HoOrgId]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="slocIdBind">
+        <TransientExpression
+          trustMode="untrusted"><![CDATA[SlocId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_TransReqTyp"
+    ListVOName="LOVReqTypVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransReqTyp"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TransReqTypId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttNm"/>
+      <Item Value="AttId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttNm"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransRoutTyp"
+    ListVOName="LOVRouteVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0"
+    ComboRowCountHint="10">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransRoutTyp"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TransRoutTypId"/>
+      <Item Value="ArrivalLocId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="RouteNm"/>
+      <Item Value="DocId"/>
+      <Item Value="ArrivalPnt"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="RouteNm"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransVhclTyp"
+    ListVOName="LOVVhclTypeVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransVhclTyp"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TransVhclTypId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttNm"/>
+      <Item Value="AttId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttNm"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT a.CURR_ID_SP,          
+--a.SO_WH_DT,          
+a.DOC_ID,          
+a.DOC_DT,          
+a.CLD_ID,          
+a.SLOC_ID,          
+a.HO_ORG_ID,          
+a.ORG_ID,          
+a.SO_ID,          
+a.EO_ID,          
+a.TOT_AMT_BS,          
+a.SO_MODE,          
+a.ORDER_STAT,          
+a.DLV_SCHDL_NO,          
+a.FY_ID,          
+a.DLV_DT,          
+--a.WH_ID,          
+--a.WH_NM,          
+a.ROUTE_ID,          
+a.ARRIVAL_LOC_ID,          
+a.DEPART_LOC_ID,          
+a.SHIP_ADDS,          
+--a.STD_WEIGHT,          
+a.ADDS_LOC ,          
+b.ADDS ,          
+c.ROUTE_NM ,          
+A.CASH_CUST_NM,          
+A.CBM_VAL ,          
+A.SALES_ITM_QTY ,          
+exp_flag          
+FROM          
+(SELECT CURR_ID_SP,          
+--SO_WH_DT,          
+DOC_ID,          
+DOC_DT,          
+CLD_ID,          
+SLOC_ID,          
+HO_ORG_ID,          
+ORG_ID,          
+SO_ID,          
+EO_ID,          
+TOT_AMT_BS,          
+SO_MODE,          
+ORDER_STAT,          
+DLV_SCHDL_NO,          
+FY_ID,          
+DLV_DT,          
+--WH_ID,          
+--WH_NM,          
+ROUTE_ID,          
+ARRIVAL_LOC_ID,          
+DEPART_LOC_ID,          
+SHIP_ADDS,          
+--STD_WEIGHT,          
+ADDS_LOC ,          
+CASH_CUST_NM,          
+CBM_VAL ,          
+SALES_ITM_QTY ,          
+exp_flag          
+FROM          
+(WITH           
+ship_loc AS          
+(SELECT X.CLD_ID CLD_ID,          
+X.SLOC_ID SLOC_ID,          
+X.ADDS_ID ADDS_ID,          
+Y.ADDS_LOC ADDS_LOC,          
+X.LOC_ID LOC_ID          
+FROM APP.APP$ADDS$BK$DTL X,          
+sls.SLS$REGN$ADDS$LOC_VW Y          
+WHERE X.SLOC_ID = Y.SLOC_ID          
+AND X.CLD_ID = Y.CLD_ID          
+AND X.STRUCT_ID = Y.STRUCT_ID          
+AND X.LBL_ID = Y.LBL_ID          
+AND X.LOC_ID = Y.LOC_ID          
+AND Y.ADDS_LOC = Y.ADDS_LOC          
+AND X.LOC_ID = NVL(:BindLocId,X.LOC_ID)          
+)          
+(SELECT a.curr_id_sp,          
+--a.SO_WH_DT,          
+a.doc_id,          
+a.doc_dt,          
+a.cld_id,          
+a.sloc_id,          
+a.ho_org_id,          
+a.org_id,          
+a.so_id,          
+a.eo_id,          
+a.TOT_AMT_BS,          
+a.SO_MODE,          
+a.ORDER_STAT,          
+a.DLV_SCHDL_NO,          
+a.FY_ID,          
+a.dlv_dt,          
+--a.wh_id,          
+--a.WH_NM,          
+a.route_id,          
+a.arrival_loc_id,          
+A.DEPART_LOC_ID,          
+A.SHIP_ADDS ,          
+--H.STD_WEIGHT ,          
+i.adds_loc ,          
+a.CASH_CUST_NM,          
+a.CBM_VAL ,          
+SLS.FN_TRNP_GET_BUNDL_ITM_QTY(A.CLD_ID,A.SLOC_ID,A.HO_ORG_ID,A.ORG_ID ,A.DOC_ID) SALES_ITM_QTY ,          
+CASE          
+WHEN TRUNC(expiry_days)>=TRUNC(sysdate )          
+THEN 'N'          
+WHEN TRUNC(expiry_days)< TRUNC(sysdate )          
+THEN 'Y'          
+--ELSE 'NA'          
+END exp_flag          
+FROM sls.sls$bulk$so_vw a,          
+--ITM_STG_WT h ,          
+ship_loc i          
+WHERE I.CLD_ID =A.CLD_ID          
+AND I.SLOC_ID =A.SLOC_ID          
+AND i.ADDS_ID =a.SHIP_ADDS          
+--AND A.DOC_ID =H.DOC_ID          
+---- AND A.WH_ID =H.WH_ID          
+--AND A.CLD_ID =H.CLD_ID          
+--AND A.SLOC_ID =H.SLOC_ID          
+--AND A.HO_ORG_ID =H.HO_ORG_ID          
+--AND a.ORG_ID =h.ORG_ID          
+AND a.org_id = :bindOrgId          
+AND a.ho_org_id = :bindHoOrgid          
+AND a.sloc_id = :bindSlocId          
+AND a.cld_id = :bindCldId          
+AND a.doc_id = NVL(:bindDocId,a.doc_id)          
+AND a.eo_id = NVL(:bindEoId, a.eo_id)          
+AND a.curr_id_sp = NVL(:bindCurrId,a.curr_id_sp)          
+--AND :BindEoGroup IS NOT NULL          
+AND EXISTS          
+(SELECT 1          
+FROM APP.APP$EO EO      
+WHERE EO.EO_MST_ID =NVL(:BindEoGroup ,EO.EO_MST_ID)         
+AND A.EO_ID = EO.EO_ID      
+)          
+AND NVL(a.ROUTE_ID,0) = NVL(:BindRoutId,NVL(a.ROUTE_ID,0))          
+AND (:BindItmId IS NULL          
+OR EXISTS          
+(SELECT I.DOC_ID          
+FROM SLS.SLS$SO$DLV$SCHDL I        
+WHERE I.DOC_ID = A.DOC_ID          
+AND I.SLOC_ID = A.SLOC_ID          
+AND i.org_id = a.org_id          
+AND I.ITM_ID = NVL(:BindItmId , ITM_ID)          
+AND I.LR_BAL_QTY > 0  
+))          
+AND TRUNC(a.doc_dt) BETWEEN NVL(:BindStDt,TRUNC(NVL(a.doc_dt,sysdate))) AND NVL(:BindEndDt,TRUNC(NVL(a.doc_dt,sysdate)))          
+AND :BINDDOCSRCTYPE=2341          
+GROUP BY --a.SO_WH_DT,          
+a.doc_id,          
+a.doc_dt,          
+a.cld_id,          
+a.sloc_id,          
+a.ho_org_id,          
+a.org_id,          
+a.so_id,          
+a.eo_id,          
+a.TOT_AMT_BS,          
+a.SO_MODE,          
+a.ORDER_STAT,          
+a.DLV_SCHDL_NO,          
+a.FY_ID,          
+a.dlv_dt,          
+--a.wh_id,          
+--a.WH_NM,          
+a.route_id,          
+a.arrival_loc_id,          
+a.depart_loc_id,          
+a.ship_adds,          
+A.WH_ADDS,          
+A.CURR_ID_SP,          
+--H.STD_WEIGHT,          
+i.adds_loc ,          
+a.CASH_CUST_NM,          
+A.CBM_VAL ,          
+CASE          
+WHEN TRUNC(expiry_days)>=TRUNC(sysdate )          
+THEN 'N'          
+WHEN TRUNC(expiry_days)< TRUNC(sysdate )          
+THEN 'Y'          
+--ELSE 'NA'          
+END          
+)          
+UNION ALL          
+SELECT CURR_ID_SP,          
+--RMA_WH_DT SO_WH_DT,          
+DOC_ID,          
+DOC_DT,          
+CLD_ID,          
+SLOC_ID,          
+HO_ORG_ID,          
+ORG_ID,          
+RMA_ID SO_ID,          
+EO_ID,          
+TOT_AMT_BS,          
+RMA_MODE SO_MODE,          
+RMA_STAT ORDER_STAT,          
+DLV_SCHDL_NO,          
+FY_ID,          
+DLV_DT,          
+--WH_ID,          
+--WH_NM,          
+ROUTE_ID,          
+ARRIVAL_LOC_ID,          
+DEPART_LOC_ID,          
+SHIP_ADDS,          
+--STD_WEIGHT,          
+ADDS_LOC ,          
+null CASH_CUST_NM,          
+NULL CBM_VAL ,          
+0 SALES_ITM_QTY ,          
+'N' exp_flag          
+FROM          
+(WITH      
+--ITM_STG_WT AS          
+--(SELECT a.CLD_ID,          
+--a.SLOC_ID,          
+--a.HO_ORG_ID,          
+--a.ORG_ID,          
+--a.DOC_ID,          
+----a.WH_ID,          
+--NVL(SUM(a.RCPT_QTY*b.std_weight*(app.fn_get_uom_conv_fctr (a.SLOC_ID ,a.cld_id,a.org_id,b.itm_id,b.UOM_SLS,UOM_BASIC))),0) std_weight          
+--FROM SLS.SLS$RMA$ITM A,          
+--APP.APP$ITM$PRF B          
+--WHERE A.CLD_ID =B.CLD_ID          
+--AND A.SLOC_ID =B.SLOC_ID          
+--AND A.HO_ORG_ID=B.HO_ORG_ID          
+--AND A.ITM_ID =B.ITM_ID          
+--GROUP BY A.CLD_ID,          
+--A.SLOC_ID,          
+--A.HO_ORG_ID,          
+--A.ORG_ID,          
+--A.DOC_ID--,          
+----A.WH_ID          
+--),          
+ship_loc AS          
+(SELECT X.CLD_ID CLD_ID,          
+X.SLOC_ID SLOC_ID,          
+X.ADDS_ID ADDS_ID,          
+Y.ADDS_LOC ADDS_LOC,          
+X.LOC_ID LOC_ID          
+FROM APP.APP$ADDS$BK$DTL X,          
+sls.SLS$REGN$ADDS$LOC_VW Y          
+WHERE X.SLOC_ID = Y.SLOC_ID          
+AND X.CLD_ID = Y.CLD_ID          
+AND X.STRUCT_ID = Y.STRUCT_ID          
+AND X.LBL_ID = Y.LBL_ID          
+AND X.LOC_ID = Y.LOC_ID          
+AND Y.ADDS_LOC = Y.ADDS_LOC          
+AND X.LOC_ID = X.LOC_ID          
+AND X.LOC_ID = NVL(:BindLocId,X.LOC_ID)          
+)          
+SELECT a.curr_id_sp,          
+--a.RMA_WH_DT,          
+a.doc_id,          
+a.doc_dt,          
+a.cld_id,          
+a.sloc_id,          
+a.ho_org_id,          
+a.org_id,          
+a.RMA_id,          
+a.eo_id,          
+a.TOT_AMT_BS,          
+a.RMA_MODE,          
+a.RMA_STAT,          
+a.DLV_SCHDL_NO,          
+a.FY_ID,          
+a.dlv_dt,          
+--a.wh_id,          
+--a.WH_NM,          
+a.route_id,          
+a.arrival_loc_id,          
+A.DEPART_LOC_ID,          
+A.SHIP_ADDS ,          
+--H.STD_WEIGHT ,          
+i.adds_loc          
+FROM sls.sls$bulk$RMA_vw a,          
+--ITM_STG_WT h ,          
+ship_loc i          
+WHERE I.CLD_ID =A.CLD_ID          
+AND I.SLOC_ID =A.SLOC_ID          
+AND i.ADDS_ID =a.SHIP_ADDS          
+--AND A.DOC_ID =H.DOC_ID          
+---- AND A.WH_ID =H.WH_ID          
+--AND A.CLD_ID =H.CLD_ID          
+--AND A.SLOC_ID =H.SLOC_ID          
+--AND A.HO_ORG_ID =H.HO_ORG_ID          
+--AND a.ORG_ID =h.ORG_ID          
+AND a.org_id = :bindOrgId          
+AND a.ho_org_id = :bindHoOrgid          
+AND a.sloc_id = :bindSlocId          
+AND a.cld_id = :bindCldId          
+AND a.doc_id = NVL(:bindDocId,a.doc_id)          
+AND a.eo_id = NVL(:bindEoId, a.eo_id)          
+AND a.curr_id_sp = NVL(:bindCurrId,a.curr_id_sp)          
+AND NVL(a.ROUTE_ID,0) = NVL(:BindRoutId,NVL(a.ROUTE_ID,0))          
+AND (:BindItmId IS NULL          
+OR EXISTS          
+(SELECT I.DOC_ID          
+FROM SLS.SLS$RMA$ITM I          
+WHERE I.DOC_ID = A.DOC_ID          
+AND I.SLOC_ID = A.SLOC_ID          
+AND i.org_id = a.org_id          
+AND I.ITM_ID = NVL(:BindItmId , ITM_ID)          
+))          
+AND TRUNC(a.doc_dt) BETWEEN NVL(:BindStDt,TRUNC(NVL(a.doc_dt,sysdate))) AND NVL(:BindEndDt,TRUNC(NVL(a.doc_dt,sysdate)))          
+AND :BINDDOCSRCTYPE=2342          
+GROUP BY --a.RMA_WH_DT,          
+a.doc_id,          
+a.doc_dt,          
+a.cld_id,          
+a.sloc_id,          
+a.ho_org_id,          
+a.org_id,          
+a.RMA_id,          
+a.eo_id,          
+a.TOT_AMT_BS,          
+a.RMA_MODE,          
+a.RMA_STAT,          
+a.DLV_SCHDL_NO,          
+a.FY_ID,          
+a.dlv_dt,          
+--a.wh_id,          
+--a.WH_NM,          
+a.route_id,          
+a.arrival_loc_id,          
+a.depart_loc_id,          
+a.ship_adds,          
+A.WH_ADDS,          
+A.CURR_ID_SP,          
+--H.STD_WEIGHT,          
+I.Adds_Loc         
+)         
+)) A,          
+APP.APP$ADDS$VW B ,          
+SLS.SLS$TRNP$ROUTE$PRF C          
+WHERE a.SHIP_ADDS = b.adds_id          
+AND a.route_id = c.route_id(+)          
+AND a.cld_id = c.cld_id(+)          
+AND a.sloc_id = c.sloc_id(+)          
+AND a.org_id = c.org_id(+)           
+AND a.ho_org_id = c.ho_org_id(+)]]></SQLQuery>
+  <ViewAttribute
+    Name="CurrIdSp"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="CURR_ID_SP"
+    Expression="CURR_ID_SP"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="DocId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="40"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DOC_ID"
+    Expression="DOC_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DocDt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    AliasName="DOC_DT"
+    Expression="DOC_DT"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="CldId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CLD_ID"
+    Expression="CLD_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SlocId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SLOC_ID"
+    Expression="SLOC_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="HoOrgId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HO_ORG_ID"
+    Expression="HO_ORG_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrgId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORG_ID"
+    Expression="ORG_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SoId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SO_ID"
+    Expression="SO_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EoId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="EO_ID"
+    Expression="EO_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TotAmtBs"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="26"
+    Scale="6"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="TOT_AMT_BS"
+    Expression="TOT_AMT_BS"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SoMode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SO_MODE"
+    Expression="SO_MODE"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="OrderStat"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ORDER_STAT"
+    Expression="ORDER_STAT"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="DlvSchdlNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="DLV_SCHDL_NO"
+    Expression="DLV_SCHDL_NO"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="FyId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="FY_ID"
+    Expression="FY_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="DlvDt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    AliasName="DLV_DT"
+    Expression="DLV_DT"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="RouteId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="TYPE"
+    AliasName="ROUTE_ID"
+    Expression="ROUTE_ID"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="ArrivalLocId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ARRIVAL_LOC_ID"
+    Expression="ARRIVAL_LOC_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DepartLocId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEPART_LOC_ID"
+    Expression="DEPART_LOC_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipAdds"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="TYPE"
+    AliasName="SHIP_ADDS"
+    Expression="SHIP_ADDS"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="AddsLoc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ADDS_LOC"
+    Expression="ADDS_LOC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Adds"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ADDS"
+    Expression="ADDS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RouteNm"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ROUTE_NM"
+    Expression="ROUTE_NM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CashCustNm"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="120"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASH_CUST_NM"
+    Expression="CASH_CUST_NM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="120"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CbmVal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="CBM_VAL"
+    Expression="CBM_VAL"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SalesItmQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="TYPE"
+    AliasName="SALES_ITM_QTY"
+    Expression="SALES_ITM_QTY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ExpFlag"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="EXP_FLAG"
+    Expression="EXP_FLAG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransVhclTyp"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransVhclTyp">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransReqTyp"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransReqTyp">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransRoutTyp"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransRoutTyp">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransRoutTypId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransReqTypId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransVhclTypId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.Integer"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TransChkSelect"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransEoNm"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransGrossWt"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TransLocNm"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransLocId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransBalanceWt"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TransWhName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="DocId"/>
+    <Item Value="CldId"/>
+    <Item Value="SlocId"/>
+    <Item Value="HoOrgId"/>
+    <Item Value="OrgId"/>
+    <Item Value="EoId"/>
+    <Item Value="DlvSchdlNo"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="trnpbulkvhclreqapp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

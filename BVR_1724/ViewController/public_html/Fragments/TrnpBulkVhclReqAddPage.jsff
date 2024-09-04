@@ -1,0 +1,1341 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1">
+    <af:panelHeader text=" " id="ph1" inlineStyle="height:28px;" styleClass="AFStretchWidth LeftHeader">
+      <f:facet name="context">
+        <af:outputLabel value="#{bundle['LBL.17822']}" id="ol1"/>
+      </f:facet>
+      <f:facet name="toolbar">
+        <af:toolbar id="t3">
+          <af:selectBooleanCheckbox value="#{bindings.Freeze.inputValue}" label="#{bindings.Freeze.label}"
+                                    shortDesc="#{bindings.Freeze.hints.tooltip}" id="sbc2"
+                                    visible="false" autoSubmit="true"/>
+          <af:link text="Download UnScanned Barcodes" id="l24"
+                   destination="/reports/trnpbulkvhclreqServlet?CldId=#{pageFlowScope.GLBL_APP_CLD_ID}&amp;SlocId=#{pageFlowScope.GLBL_APP_SERV_LOC} &amp;OrgId=#{pageFlowScope.GLBL_APP_USR_ORG}&amp;HoOrgId=#{pageFlowScope.GLBL_HO_ORG_ID}&amp;DocId=#{bindings.DocId.inputValue}&amp;LinkId=l24"
+                   targetFrame="_blank"
+                   inlineStyle="color: white;     font-weight: bold;     padding: 3px;     background-color: orange;     text-decoration: none;     margin: 5px;"
+                   visible="#{pageFlowScope.TrnpBulkVhclReqBean.renderBcLink eq 'Y' and bindings.DocTypId.inputValue==5237}"/>
+          <af:button text="#{bundle['LBL.17825']}" id="b1" actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.amendVhclSchdl}"
+                     rendered="#{bindings.DocTypId.inputValue ne 915}"
+                     inlineStyle="color: white;     font-weight: bold;     background-color: orange; "
+                     visible="#{bindings.LrStatus.inputValue eq 2352}"
+                     disabled="#{ebizsec['24266E'] or pageFlowScope.TrnpBulkVhclReqBean.mode == 'A'}"/>
+          <af:button text="#{bundle['LBL.17826']}" id="b2"
+                     actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.cancelOldVhclReq}"
+                     rendered="#{bindings.DocTypId.inputValue ne 915}"
+   
+                     inlineStyle="color: white;     font-weight: bold;    background-color: orange;"
+                     visible="#{bindings.LrStatus.inputValue eq 2352}"
+                     disabled="#{ebizsec['24266D'] or pageFlowScope.TrnpBulkVhclReqBean.mode == 'A'}"/>
+          <af:spacer width="10" height="10" id="s12"/>
+          <af:outputText value="#{bindings.Freeze1.inputValue}" shortDesc="#{bindings.Freeze1.hints.tooltip}"
+                         id="ot35" visible="false"/>
+          <af:link id="l3" icon="#{resource['images:enable_add_blue.png']}"
+                   actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.addBulkVhclReqHdrAL}"
+                   disabled="#{ebizsec['24266A'] or pageFlowScope.TrnpBulkVhclReqBean.mode == 'A'}"
+                   disabledIcon="#{resource['images:disabled_add_white.png']}"/>
+          <af:link id="l8" icon="#{resource['images:enable_edit_blue.png']}"
+                   actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.editBulkVhclReqAL}"
+                   disabled="#{ebizsec['24266E'] or pageFlowScope.TrnpBulkVhclReqBean.mode == 'A' || bindings.Freeze1.inputValue eq 'Y' || bindings.TransLrStatus.inputValue == 'Cancelled' || bindings.VrMode.inputValue eq 2465}"
+                   disabledIcon="#{resource['images:disabled_edit_white.png']}" partialTriggers="sbc2"/>
+          <af:link id="l5" icon="#{resource['images:enable_save_blue.png']}"
+                   actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.saveBulkVhclReqAL}"
+                   disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.SlsTrnpBulkVrSrc1Iterator.estimatedRowCount&lt;=0  || bindings.VrMode.inputValue eq 2465}"
+                   disabledIcon="#{resource['images:disabled_save_white.png']}" partialTriggers="b1"/>
+          <af:link id="l13" icon="#{resource['images:enable_save_and_forward_blue.png']}"
+                   disabledIcon="#{resource['images:disable_save_and_forward_blue.png']}"
+                   action="#{pageFlowScope.TrnpBulkVhclReqBean.saveAndForwardAction}"
+                   disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.SlsTrnpBulkVrSrc1Iterator.estimatedRowCount&lt;=0}"
+                   partialTriggers="b1"/>
+          <af:link id="l9" icon="#{resource['images:enable_cancel_blue.png']}"
+                   action="#{pageFlowScope.TrnpBulkVhclReqBean.canclBulkVhclReqAction}"
+                   disabledIcon="#{resource['images:disabled_cancel_white.png']}" immediate="true"/>
+          <af:link id="l12" icon="#{resource['images:print_blue.png']}"
+                   targetFrame="_blank" disabledIcon="#{resource['images:disable_printBlueIcon.png']}"
+                   disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'A' || bindings.SlsTrnpBulkVrSrc1Iterator.estimatedRowCount&lt;=0}"
+                   destination="/reports/trnpbulkvhclreqServlet?CldId=#{pageFlowScope.GLBL_APP_CLD_ID}&amp;SlocId=#{pageFlowScope.GLBL_APP_SERV_LOC}&amp;OrgId=#{pageFlowScope.GLBL_APP_USR_ORG}&amp;HoOrgId=#{pageFlowScope.GLBL_HO_ORG_ID}&amp;DocId=#{bindings.DocId.inputValue}&amp;LinkId=l12"/>
+          <af:link id="l20"
+                   destination="/reports/trnpbulkvhclreqServlet?CldId=#{pageFlowScope.GLBL_APP_CLD_ID}&amp;SlocId=#{pageFlowScope.GLBL_APP_SERV_LOC}&amp;OrgId=#{pageFlowScope.GLBL_APP_USR_ORG}&amp;HoOrgId=#{pageFlowScope.GLBL_HO_ORG_ID}&amp;DocId=#{bindings.DocId.inputValue}&amp;LinkId=l20"
+                   targetFrame="_blank"
+                   disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'A' || bindings.SlsTrnpBulkVrSrc1Iterator.estimatedRowCount&lt;=0}"
+                   icon="#{resource['images:print_blue.png']}"
+                   disabledIcon="#{resource['images:disable_printBlueIcon.png']}"
+                   actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.rptPrintButtonAL}"
+                   action="#{pageFlowScope.TrnpBulkVhclReqBean.populateRptDataACTION}"/>
+          <af:link id="l23" icon="#{resource['images:print_blue.png']}" targetFrame="_blank"
+                   disabledIcon="#{resource['images:disable_printBlueIcon.png']}"
+                   disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'A' || bindings.SlsTrnpBulkVrSrc1Iterator.estimatedRowCount&lt;=0}"
+                   destination="/reports/trnpbulkvhclreqServlet?CldId=#{pageFlowScope.GLBL_APP_CLD_ID}&amp;SlocId=#{pageFlowScope.GLBL_APP_SERV_LOC}&amp;OrgId=#{pageFlowScope.GLBL_APP_USR_ORG}&amp;HoOrgId=#{pageFlowScope.GLBL_HO_ORG_ID}&amp;DocId=#{bindings.DocId.inputValue}&amp;LinkId=l23"
+                   visible="#{pageFlowScope.TrnpBulkVhclReqBean.catgId == 52|| bindings.DocTypId.inputValue==5237}"/>
+        </af:toolbar>
+      </f:facet>
+    </af:panelHeader>
+    <af:panelBox text="PanelBox3" id="pb3" showHeader="never" showDisclosure="false" styleClass="AFStretchWidth">
+      <f:facet name="toolbar"/>
+      <af:panelGroupLayout id="pgl9" layout="horizontal" styleClass="AFStretchWidth LeftHeader">
+        <af:panelLabelAndMessage label="#{bundle['LBL.4500']} : " id="plam1">
+          <af:outputText value="#{bindings.DispId.inputValue}" shortDesc="#{bindings.DispId.hints.tooltip}" id="ot19"
+                         inlineStyle="color:white;font-weight:bold;"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bundle['LBL.17827']}" id="plam3">
+          <af:outputText value="#{bindings.DrftDispId.inputValue}" shortDesc="#{bindings.DrftDispId.hints.tooltip}"
+                         id="ot21" inlineStyle="color:white;font-weight:bold;"/>
+        </af:panelLabelAndMessage>
+        <af:inputDate value="#{bindings.UsrIdCreateDt.inputValue}" label="#{bundle['LBL.8103']}"
+                      required="#{bindings.UsrIdCreateDt.hints.mandatory}"
+                      columns="#{bindings.UsrIdCreateDt.hints.displayWidth}"
+                      shortDesc="#{bindings.UsrIdCreateDt.hints.tooltip}" id="id1" autoSubmit="true" readOnly="true"
+                      contentStyle="color:white;font-weight:bold;">
+          <f:validator binding="#{bindings.UsrIdCreateDt.validator}"/>
+          <af:convertDateTime pattern="#{pageFlowScope.GLBL_DT_FORMAT}"/>
+        </af:inputDate>
+        <af:panelLabelAndMessage label="#{bundle['LBL.13057']}" id="plam2">
+          <af:outputText value="#{bindings.TransUsrNm.inputValue}" shortDesc="#{bindings.TransUsrNm.hints.tooltip}"
+                         id="ot20" inlineStyle="color:white;font-weight:bold;"/>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bundle['LBL.940']}" id="plam4">
+          <af:selectOneChoice value="#{bindings.LrStatus1.inputValue}" label=" "
+                              required="#{bindings.LrStatus1.hints.mandatory}"
+                              shortDesc="#{bindings.LrStatus1.hints.tooltip}" id="soc1" readOnly="true"
+                              autoSubmit="true" contentStyle="color:white;font-weight:bold;"
+                              binding="#{pageFlowScope.TrnpBulkVhclReqBean.lrStatusBind}" partialTriggers="l5">
+            <f:selectItems value="#{bindings.LrStatus1.items}" id="si1"/>
+            <f:validator binding="#{bindings.LrStatus1.validator}"/>
+          </af:selectOneChoice>
+        </af:panelLabelAndMessage>
+        <af:panelLabelAndMessage label="#{bundle['LBL.2312']}" id="plam5">
+          <af:outputText value="#{bindings.TransVrMode.inputValue}" shortDesc="#{bindings.TransVrMode.hints.tooltip}"
+                         id="ot39" inlineStyle="color:white;font-weight:bold;"/>
+        </af:panelLabelAndMessage>
+      </af:panelGroupLayout>
+      <af:separator id="s1"/>
+      <af:panelGroupLayout id="pgl13" halign="center" valign="middle" layout="horizontal"
+                           visible="#{bindings.AmdNo.inputValue ne '0'}">
+        <af:panelLabelAndMessage label="Amendment No.: " id="plam6" inlineStyle="font-weight:bold;"
+                                 labelStyle="font-weight:bold;">
+          <af:outputText value="#{bindings.AmdNo.inputValue}" shortDesc="#{bindings.AmdNo.hints.tooltip}" id="ot53"
+                         partialTriggers="b1"/>
+        </af:panelLabelAndMessage>
+      </af:panelGroupLayout>
+      <af:panelGroupLayout id="pgl14" styleClass=" AFStretchWidth RightBoxPanelForm"
+                           layout="vertical">
+        <af:selectOneRadio value="#{bindings.TrfType.inputValue}" label="Transfer Type"
+                           required="#{bindings.TrfType.hints.mandatory}" shortDesc="#{bindings.TrfType.hints.tooltip}"
+                           id="sor1" labelStyle="font-weight:bold;" contentStyle="font-weight:bold;" autoSubmit="true"
+                           layout="horizontal"
+                           disabled="#{bindings.TrnpBulkSoView1.estimatedRowCount>0 or bindings.SlsTrnpBulkVrItm1Iterator.estimatedRowCount>0}">
+          <f:selectItems value="#{bindings.TrfType.items}" id="si2"/>
+          <f:validator binding="#{bindings.TrfType.validator}"/>
+        </af:selectOneRadio>
+      </af:panelGroupLayout>
+      <af:separator id="s14"/>
+      <af:panelFormLayout id="pfl1" labelAlignment="start" rows="3" maxColumns="8" inlineStyle="padding:10px;"
+                          styleClass=" AFStretchWidth RightBoxPanelForm">
+        <af:selectOneChoice value="#{bindings.TransDocTyp.inputValue}" label="#{bundle['MSG.12381']}"
+                            required="#{bindings.TransDocTyp.hints.mandatory}"
+                            shortDesc="#{bindings.TransDocTyp.hints.tooltip}" id="soc4"
+                            contentStyle="width:180px;padding:2px;border: #b2aeae solid thin;"
+                            disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}"
+                            autoSubmit="true">
+          <f:selectItems value="#{bindings.TransDocTyp.items}" id="si4"/>
+          <f:validator binding="#{bindings.TransDocTyp.validator}"/>
+        </af:selectOneChoice>
+        <af:inputListOfValues id="transSoIdSearchId"
+                              popupTitle="#{bundle['LBL.12614']}#{bundle['LBL.12896']}"
+                              value="#{bindings.TransSoIdSearch.inputValue}"
+                              label="#{bundle['LBL.2329']}"
+                              model="#{bindings.TransSoIdSearch.listOfValuesModel}"
+                              required="#{bindings.TransSoIdSearch.hints.mandatory}"
+                              columns="#{bindings.TransSoIdSearch.hints.displayWidth}"
+                              shortDesc="#{bundle['LBL.12896']}"
+                              contentStyle="width:180px;padding:2px;border: #b2aeae solid thin;"
+                              disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}"
+                              partialTriggers="sbc2">
+          <f:validator binding="#{bindings.TransSoIdSearch.validator}"/>
+          <af:autoSuggestBehavior suggestedItems="#{bindings.TransSoIdSearch.suggestedItems}"/>
+        </af:inputListOfValues>
+        <af:inputListOfValues id="transGroupNmId" popupTitle="Search and Select: #{bindings.TransGroupNm.hints.label}"
+                              value="#{bindings.TransGroupNm.inputValue}" label="Group Name "
+                              model="#{bindings.TransGroupNm.listOfValuesModel}"
+                              required="#{bindings.TransGroupNm.hints.mandatory}"
+                              columns="#{bindings.TransGroupNm.hints.displayWidth}"
+                              shortDesc="#{bindings.TransGroupNm.hints.tooltip}"
+                              contentStyle="width:180px;padding:2px;border: #b2aeae solid thin;" autoSubmit="true"
+                              disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.DocTypId.inputValue==5237}">
+          <f:validator binding="#{bindings.TransGroupNm.validator}"/>
+          <af:autoSuggestBehavior suggestedItems="#{bindings.TransGroupNm.suggestedItems}"/>
+        </af:inputListOfValues>
+        <af:inputListOfValues id="transCustSearchId"
+                              popupTitle="#{bundle['LBL.12614']} #{bundle['LBL.298']}"
+                              value="#{bindings.TransCustSearch.inputValue}"
+                              label="#{bundle['LBL.298']}"
+                              model="#{bindings.TransCustSearch.listOfValuesModel}"
+                              required="#{bindings.TransCustSearch.hints.mandatory}"
+                              columns="#{bindings.TransCustSearch.hints.displayWidth}"
+                              shortDesc="#{bindings.TransCustSearch.hints.tooltip}"
+                              contentStyle="width:180px;padding:2px;border: #b2aeae solid thin;"
+                              disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.DocTypId.inputValue==5237}"
+                              partialTriggers="sbc2">
+          <f:validator binding="#{bindings.TransCustSearch.validator}"/>
+          <af:autoSuggestBehavior suggestedItems="#{bindings.TransCustSearch.suggestedItems}"/>
+        </af:inputListOfValues>
+        <af:inputListOfValues id="transCurrDescId"
+                              popupTitle="#{bundle['LBL.12614']} #{bindings.TransCurrDesc.hints.label}"
+                              value="#{bindings.TransCurrDesc.inputValue}" label="#{bundle['LBL.286']}"
+                              model="#{bindings.TransCurrDesc.listOfValuesModel}"
+                              required="#{bindings.TransCurrDesc.hints.mandatory}"
+                              columns="#{bindings.TransCurrDesc.hints.displayWidth}" shortDesc="#{bundle['LBL.286']}"
+                              contentStyle="width:180px;padding:2px;border: #b2aeae solid thin;" autoSubmit="true"
+                              disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}"
+                              showRequired="true">
+          <f:validator binding="#{bindings.TransCurrDesc.validator}"/>
+          <af:autoSuggestBehavior suggestedItems="#{bindings.TransCurrDesc.suggestedItems}"/>
+        </af:inputListOfValues>
+        <af:inputListOfValues id="transItemSearchId"
+                              popupTitle="#{bundle['LBL.12614']} #{bundle['LBL.528']}"
+                              value="#{bindings.TransItemSearch.inputValue}"
+                              label="#{bundle['LBL.528']}"
+                              model="#{bindings.TransItemSearch.listOfValuesModel}"
+                              required="#{bindings.TransItemSearch.hints.mandatory}"
+                              columns="#{bindings.TransItemSearch.hints.displayWidth}"
+                              shortDesc="#{bundle['LBL.528']}"
+                              contentStyle="width:180px;padding:2px;border: #b2aeae solid thin;"
+                              disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y' || bindings.DocTypId.inputValue==5237}"
+                              partialTriggers="sbc2">
+          <f:validator binding="#{bindings.TransItemSearch.validator}"/>
+          <af:autoSuggestBehavior suggestedItems="#{bindings.TransItemSearch.suggestedItems}"/>
+        </af:inputListOfValues>
+        <af:inputListOfValues id="transLocNmSrchId"
+                              popupTitle="#{bundle['LBL.12614']} #{bundle['LBL.9124']}"
+                              value="#{bindings.TransLocNmSrch.inputValue}"
+                              label="#{bundle['LBL.9124']}"
+                              model="#{bindings.TransLocNmSrch.listOfValuesModel}"
+                              required="#{bindings.TransLocNmSrch.hints.mandatory}"
+                              columns="#{bindings.TransLocNmSrch.hints.displayWidth}"
+                              shortDesc="#{bundle['LBL.9124']}"
+                              contentStyle="width:180px;padding:2px;border: #b2aeae solid thin;" autoSubmit="true"
+                              disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.DocTypId.inputValue==5237}">
+          <f:validator binding="#{bindings.TransLocNmSrch.validator}"/>
+          <af:autoSuggestBehavior suggestedItems="#{bindings.TransLocNmSrch.suggestedItems}"/>
+        </af:inputListOfValues>
+        <af:inputListOfValues id="ilov1" popupTitle="Search and Select: #{bindings.TransRouteName.hints.label}"
+                              value="#{bindings.TransRouteName.inputValue}" label="#{bundle['LBL.4084']}"
+                              model="#{bindings.TransRouteName.listOfValuesModel}"
+                              required="#{bindings.TransRouteName.hints.mandatory}"
+                              columns="#{bindings.TransRouteName.hints.displayWidth}"
+                              shortDesc="#{bindings.TransRouteName.hints.tooltip}"
+                              contentStyle="width:180px;padding:2px;border: #b2aeae solid thin;"
+                              disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.DocTypId.inputValue==5237}">
+          <f:validator binding="#{bindings.TransRouteName.validator}"/>
+          <af:autoSuggestBehavior suggestedItems="#{bindings.TransRouteName.suggestedItems}"/>
+        </af:inputListOfValues>
+        <af:inputDate value="#{bindings.TransStDt.inputValue}" label="#{bundle['LBL.935']}"
+                      required="#{bindings.TransStDt.hints.mandatory}"
+                      columns="#{bindings.TransStDt.hints.displayWidth}" shortDesc="#{bindings.TransStDt.hints.tooltip}"
+                      id="id2" contentStyle="width:180px;padding:2px;border: #b2aeae solid thin;" autoSubmit="true"
+                      disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}">
+          <f:validator binding="#{bindings.TransStDt.validator}"/>
+          <af:convertDateTime pattern="#{pageFlowScope.GLBL_DT_FORMAT}"/>
+        </af:inputDate>
+        <af:inputDate value="#{bindings.TransEndDt.inputValue}" label="#{bundle['LBL.406']}"
+                      required="#{bindings.TransEndDt.hints.mandatory}"
+                      columns="#{bindings.TransEndDt.hints.displayWidth}"
+                      shortDesc="#{bindings.TransEndDt.hints.tooltip}" id="id3"
+                      contentStyle="width:180px;padding:2px;border: #b2aeae solid thin;" autoSubmit="true"
+                      disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}">
+          <f:validator binding="#{bindings.TransEndDt.validator}"/>
+          <af:convertDateTime pattern="#{pageFlowScope.GLBL_DT_FORMAT}"/>
+        </af:inputDate>
+        <af:spacer width="10" height="10" id="s13"/>
+        <af:toolbar id="t1">
+          <af:spacer width="130" height="10" id="s2"/>
+          <af:link id="l1" icon="#{resource['images:enable_search_blue.png']}"
+                   actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.searchTrnpBulkSoAL}"
+                   disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y' || bindings.SlsTrnpBulkVrSrc1Iterator.estimatedRowCount > 0}"
+                   disabledIcon="#{resource['images:disabled_search_white.png']}" partialTriggers="sbc2 l4"/>
+          <af:link id="l2" icon="#{resource['images:enable_reset_blue.png']}"
+                   actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.resetTrnpBulkSoAL}"
+                   disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y' ||  bindings.SlsTrnpBulkVrSrc1Iterator.estimatedRowCount > 0}"
+                   disabledIcon="#{resource['images:disabled_reset_white.png']}" partialTriggers="sbc2"/>
+        </af:toolbar>
+      </af:panelFormLayout>
+    </af:panelBox>
+    <af:panelStretchLayout id="psl1" startWidth="678px" topHeight="106px" bottomHeight="50px" rendered="false">
+      <f:facet name="center"/>
+      <f:facet name="start"/>
+    </af:panelStretchLayout>
+    <af:panelSplitter id="ps1" splitterPosition="680" positionedFromEnd="true" styleClass="AFStrtechWidth">
+      <f:facet name="first">
+        <af:panelGroupLayout id="pgl4" layout="vertical">
+          <af:panelBox text="PanelBox1" id="pb1" styleClass="AFStretchWidth" showDisclosure="false" showHeader="never"
+                       contentStyle="height:610px;">
+            <f:facet name="toolbar"/>
+            <af:panelGroupLayout id="pgl3" layout="horizontal" styleClass="AFStretchWidth LeftHeader">
+              <af:outputLabel value="#{bundle['LBL.386']}" id="ol4"/>
+              <af:spacer width="100" height="10" id="s9"/>
+              <af:link text="#{bundle['LBL.17833']}" id="l7"
+                       inlineStyle="color: white;     font-weight: bold;     padding: 3px;     background-color: orange;     text-decoration: none;     margin: 5px;"
+                       actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.addListOfOrdersAL}"
+                       disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}"
+                       rendered="#{bindings.SlsTrnpBulkVrItm1.estimatedRowCount&lt;=0}" partialTriggers="sbc2"/>
+              <af:inputListOfValues id="transVhclNoId"
+                                    popupTitle="Search and Select: #{bindings.TransVhclNo.hints.label}"
+                                    value="#{bindings.TransVhclNo.inputValue}"
+                                    model="#{bindings.TransVhclNo.listOfValuesModel}"
+                                    required="#{bindings.TransVhclNo.hints.mandatory}"
+                                    columns="#{bindings.TransVhclNo.hints.displayWidth}"
+                                    shortDesc="#{bindings.TransVhclNo.hints.tooltip}" placeholder="Vehicle"
+                                    contentStyle="width:100px;" autoSubmit="true"
+                                    disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}"
+                                    validator="#{pageFlowScope.TrnpBulkVhclReqBean.vhclNoVldtr}"
+                                    rendered="#{bindings.SlsTrnpBulkVrItm1.estimatedRowCount>0}"
+                                    visible="#{bindings.TransOwnershipTyp.inputValue eq 'I'}">
+                <f:validator binding="#{bindings.TransVhclNo.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.TransVhclNo.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:inputText value="#{bindings.TransCustVhclNo.inputValue}"
+                            required="#{bindings.TransCustVhclNo.hints.mandatory}"
+                            columns="#{bindings.TransCustVhclNo.hints.displayWidth}"
+                            maximumLength="#{bindings.TransCustVhclNo.hints.precision}"
+                            shortDesc="#{bindings.TransCustVhclNo.hints.tooltip}" id="it17"
+                            placeholder="Customer Vehicle" contentStyle="width:100px;"
+                            disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}" autoSubmit="true"
+                            rendered="#{bindings.SlsTrnpBulkVrItm1.estimatedRowCount>0}"
+                            visible="#{bindings.TransOwnershipTyp.inputValue eq 'C' or bindings.TransOwnershipTyp.inputValue eq 'T'}">
+                <f:validator binding="#{bindings.TransCustVhclNo.validator}"/>
+              </af:inputText>
+              <af:outputText value="#{bindings.TransOwnershipTyp.inputValue}"
+                             shortDesc="#{bindings.TransOwnershipTyp.hints.tooltip}" id="ot54" visible="false"/>
+              <af:link text="Populate Vehicle" id="l22"
+                       inlineStyle="color: white;     font-weight: bold;     padding: 3px;     background-color: orange;     text-decoration: none;     margin: 5px;"
+                       actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.popVehicle}"
+                       rendered="#{bindings.SlsTrnpBulkVrItm1.estimatedRowCount>0}"
+                       disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}"/>
+              <af:inputText value="#{bindings.DocId.inputValue}" label="#{bindings.DocId.hints.label}"
+                            required="#{bindings.DocId.hints.mandatory}" columns="#{bindings.DocId.hints.displayWidth}"
+                            maximumLength="#{bindings.DocId.hints.precision}"
+                            shortDesc="#{bindings.DocId.hints.tooltip}" id="it4" visible="false">
+                <f:validator binding="#{bindings.DocId.validator}"/>
+              </af:inputText>
+            </af:panelGroupLayout>
+            <af:separator id="s8"/>
+            <af:panelFormLayout id="pfl4" rows="1" inlineStyle="padding:10px;"
+                                styleClass=" AFStretchWidth RightBoxPanelForm" fieldWidth="200"
+                                rendered="#{bindings.SlsTrnpBulkVrSrc1.estimatedRowCount&lt;=0}" maxColumns="3">
+              <af:selectOneChoice value="#{bindings.TransReqType.inputValue}" label="#{bundle['LBL.4502']}"
+                                  required="#{bindings.TransReqType.hints.mandatory}"
+                                  shortDesc="#{bindings.TransReqType.hints.tooltip}" id="soc3"
+                                  contentStyle="width:160px;" autoSubmit="true"
+                                  disabled="#{(bindings.TrnpBulkSoView1Iterator.estimatedRowCount&lt;=0 || pageFlowScope.TrnpBulkVhclReqBean.mode == 'V') &amp;&amp; (bindings.TrnpBulkTransferNewVo1Iterator.estimatedRowCount&lt;=0 || pageFlowScope.TrnpBulkVhclReqBean.mode == 'V') }">
+                <f:selectItems value="#{bindings.TransReqType.items}" id="si3"/>
+                <f:validator binding="#{bindings.TransReqType.validator}"/>
+              </af:selectOneChoice>
+              <af:inputText value="#{bindings.VhclNo.inputValue}" label="Vehicle No"
+                            required="#{bindings.VhclNo.hints.mandatory}"
+                            columns="#{bindings.VhclNo.hints.displayWidth}"
+                            maximumLength="#{bindings.VhclNo.hints.precision}"
+                            shortDesc="#{bindings.VhclNo.hints.tooltip}" id="it10" contentStyle="width:160px;"
+                            disabled="#{bindings.TrnpBulkSoView1Iterator.estimatedRowCount&lt;=0 || pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}"
+                            autoSubmit="true" rendered="false">
+                <f:validator binding="#{bindings.VhclNo.validator}"/>
+              </af:inputText>
+              <af:inputListOfValues id="transCageNameId"
+                                    popupTitle="Search and Select: #{bindings.TransCageName.hints.label}"
+                                    value="#{bindings.TransCageName.inputValue}" label="Cage Name"
+                                    model="#{bindings.TransCageName.listOfValuesModel}"
+                                    required="#{bindings.TransCageName.hints.mandatory}"
+                                    columns="#{bindings.TransCageName.hints.displayWidth}"
+                                    shortDesc="#{bindings.TransCageName.hints.tooltip}"
+                                    contentStyle="width:150px;padding:2px;" autoSubmit="true"
+                                    disabled="#{(bindings.TrnpBulkSoView1Iterator.estimatedRowCount&lt;=0 || pageFlowScope.TrnpBulkVhclReqBean.mode == 'V') &amp;&amp; (bindings.TrnpBulkTransferNewVo1Iterator.estimatedRowCount&lt;=0 || pageFlowScope.TrnpBulkVhclReqBean.mode == 'V') }">
+                <f:validator binding="#{bindings.TransCageName.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.TransCageName.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:inputListOfValues id="transVhclTypeId" popupTitle="#{bundle['LBL.12614']} #{bundle['LBL.7611']}"
+                                    value="#{bindings.TransVhclType.inputValue}" label="#{bundle['LBL.7611']}"
+                                    model="#{bindings.TransVhclType.listOfValuesModel}"
+                                    required="#{bindings.TransVhclType.hints.mandatory}"
+                                    columns="#{bindings.TransVhclType.hints.displayWidth}"
+                                    shortDesc="#{bundle['LBL.7611']}" contentStyle="width:150px;padding:2px;"
+                                    autoSubmit="true"
+                                    disabled="#{(bindings.TrnpBulkSoView1Iterator.estimatedRowCount&lt;=0 || pageFlowScope.TrnpBulkVhclReqBean.mode == 'V') &amp;&amp; (bindings.TrnpBulkTransferNewVo1Iterator.estimatedRowCount&lt;=0 || pageFlowScope.TrnpBulkVhclReqBean.mode == 'V') }">
+                <f:validator binding="#{bindings.TransVhclType.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.TransVhclType.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:inputListOfValues id="transRouteNameId"
+                                    popupTitle="#{bundle['LBL.12614']} #{bindings.TransRouteName.hints.label}"
+                                    value="#{bindings.TransRouteName.inputValue}" label="Route"
+                                    model="#{bindings.TransRouteName.listOfValuesModel}"
+                                    required="#{bindings.TransRouteName.hints.mandatory}"
+                                    columns="#{bindings.TransRouteName.hints.displayWidth}"
+                                    shortDesc="#{bindings.TransRouteName.hints.tooltip}"
+                                    contentStyle="width:150px;padding:2px;" autoSubmit="true"
+                                    disabled="#{bindings.TrnpBulkSoView1Iterator.estimatedRowCount&lt;=0 || pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}"
+                                    rendered="false">
+                <f:validator binding="#{bindings.TransRouteName.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.TransRouteName.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:inputListOfValues id="transLocNmId"
+                                    popupTitle="#{bundle['LBL.12614']} #{bindings.TransLocNm.hints.label}"
+                                    value="#{bindings.TransLocNm.inputValue}" label="Location"
+                                    model="#{bindings.TransLocNm.listOfValuesModel}"
+                                    required="#{bindings.TransLocNm.hints.mandatory}"
+                                    columns="#{bindings.TransLocNm.hints.displayWidth}"
+                                    shortDesc="#{bindings.TransLocNm.hints.tooltip}"
+                                    contentStyle="width:150px;padding:2px;" autoSubmit="true"
+                                    disabled="#{bindings.TrnpBulkSoView1Iterator.estimatedRowCount&lt;=0 || pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}"
+                                    rendered="false">
+                <f:validator binding="#{bindings.TransLocNm.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.TransLocNm.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:inputListOfValues id="ilov2" popupTitle="#{bundle['LBL.12614']} #{bindings.TransRoutTyp.hints.label}"
+                                    value="#{bindings.TransRoutTyp.inputValue}"
+                                    label="#{bindings.TransRoutTyp.hints.label}"
+                                    model="#{bindings.TransRoutTyp.listOfValuesModel}"
+                                    required="#{bindings.TransRoutTyp.hints.mandatory}"
+                                    columns="#{bindings.TransRoutTyp.hints.displayWidth}"
+                                    shortDesc="#{bindings.TransRoutTyp.hints.tooltip}" visible="false">
+                <f:validator binding="#{bindings.TransRoutTyp.validator}"/>
+              </af:inputListOfValues>
+              <af:outputText value="#{bindings.TransReqTypeId.inputValue}"
+                             shortDesc="#{bindings.TransReqTypeId.hints.tooltip}" id="ot47" visible="false"/>
+            </af:panelFormLayout>
+            <af:separator id="s3"/>
+            <af:table value="#{bindings.TrnpBulkSoView1.collectionModel}" var="row"
+                      rows="#{bindings.TrnpBulkSoView1.rangeSize}"
+                      emptyText="#{bindings.TrnpBulkSoView1.viewable ? bundle['LBL.4595'] : bundle['MSG.2934']}"
+                      rowBandingInterval="1" selectedRowKeys="#{bindings.TrnpBulkSoView1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.TrnpBulkSoView1.collectionModel.makeCurrent}" rowSelection="single"
+                      fetchSize="#{bindings.TrnpBulkSoView1.rangeSize}" id="t2" autoHeightRows="-1"
+                      styleClass="AFStretchWidth" inlineStyle="line-height:14px;height:500px;"
+                      contentDelivery="immediate"
+                      partialTriggers="l14 l15"
+                      rendered="#{bindings.SlsTrnpBulkVrSrc1.estimatedRowCount&lt;=0 &amp;&amp; (bindings.DocTypId.inputValue eq 2341 ||bindings.DocTypId.inputValue eq 2342)}">
+              <af:column id="c5" width="30" align="center"
+                         inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }">
+                <af:selectBooleanCheckbox value="#{row.bindings.TransChkSelect.inputValue}"
+                                          label="#{row.bindings.TransChkSelect.label}"
+                                          shortDesc="#{bindings.TrnpBulkSoView1.hints.TransChkSelect.tooltip}" id="sbc1"
+                                          autoSubmit="true" disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}"
+                                          valueChangeListener="#{pageFlowScope.TrnpBulkVhclReqBean.chkSelectSOVCL}"
+                                          partialTriggers="l14 l15" immediate="true"/>
+                <f:facet name="header">
+                  <af:panelGroupLayout id="pgl10" layout="vertical">
+                    <af:link id="l14" icon="#{resource['images:enable_check_red.png']}"
+                             actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.selectAllDocumentsAL}"
+                             disabledIcon="#{resource['images:disable_select_all.png']}"
+                             disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}"/>
+                    <af:link id="l15" icon="#{resource['images:enable_uncheck_red.png']}"
+                             actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.deSelectAllDocAL}"
+                             disabledIcon="#{resource['images:disable_unselect_all.png']}"
+                             disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}"/>
+                  </af:panelGroupLayout>
+                </f:facet>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.559']}" id="c24" align="center"
+                         sortProperty="#{bindings.TrnpBulkSoView1.hints.AddsLoc.name}" sortable="false"
+                         rendered="#{!pageFlowScope.TrnpBulkVhclReqBean.featureForShippingAddress}"
+                         inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }" width="148">
+                <af:outputText value="#{row.TransLocNm}"
+                               shortDesc="#{bindings.TrnpBulkSoView1.hints.TransLocNm.tooltip}" id="ot4"
+                               rendered="false"/>
+                <af:outputText value="#{row.AddsLoc}" shortDesc="#{bindings.TrnpBulkSoView1.hints.AddsLoc.tooltip}"
+                               id="ot25"/>
+              </af:column>
+              <af:column id="c27" sortable="true" width="277" headerText="#{bundle['LBL.298']}"
+                         sortProperty="#{bindings.TrnpBulkSoView1.hints.TransEoNm.label}"
+                         inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }">
+                <af:outputText value="#{row.TransEoNm}" shortDesc="#{bindings.TrnpBulkSoView1.hints.TransEoNm.tooltip}"
+                               id="ot1" inlineStyle="color:blue; font-weight:bold;"/>
+                <af:outputText value="#{row.CashCustNm}"
+                               shortDesc="#{bindings.TrnpBulkSoView1.hints.CashCustNm.tooltip}" id="ot49"
+                               inlineStyle="font-weight:bold;"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.TrnpBulkSoView1.hints.SoId.label}" sortable="true"
+                         headerText="#{bundle['LBL.2476']}" id="c1" width="149"
+                         inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }">
+                <af:inputText value="#{row.bindings.SoId.inputValue}"
+                              label="#{bindings.TrnpBulkSoView1.hints.SoId.label}"
+                              required="#{bindings.TrnpBulkSoView1.hints.SoId.mandatory}"
+                              columns="#{bindings.TrnpBulkSoView1.hints.SoId.displayWidth}"
+                              maximumLength="#{bindings.TrnpBulkSoView1.hints.SoId.precision}"
+                              shortDesc="#{bindings.TrnpBulkSoView1.hints.SoId.tooltip}" id="it1" autoSubmit="true"
+                              readOnly="true" contentStyle="color:maroon;font-weight:bold;">
+                  <f:validator binding="#{row.bindings.SoId.validator}"/>
+                </af:inputText>
+                <af:outputText value="#{row.DocDt}" shortDesc="#{bindings.TrnpBulkSoView1.hints.DocDt.tooltip}" id="ot2"
+                               inlineStyle="font-weight:bold;">
+                  <af:convertDateTime pattern="#{pageFlowScope.GLBL_DT_FORMAT}"/>
+                </af:outputText>
+              </af:column>
+              <af:column id="c49" headerText="Warehouse"
+                         inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }" rendered="false">
+                <af:outputText value="#{row.TransWhName}"
+                               shortDesc="#{bindings.TrnpBulkSoView1.hints.TransWhName.tooltip}" id="ot45"/>
+              </af:column>
+              <af:column id="c34" sortable="true" headerText="#{bundle['LBL.358']}" width="125"
+                         visible="#{bindings.DocTypId.inputValue eq 2341}" partialTriggers="::soc4"
+                         sortProperty="#{bindings.TrnpBulkSoView1.hints.DlvDt.label}"
+                         inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }">
+                <af:outputText value="#{row.DlvDt}" shortDesc="#{bindings.TrnpBulkSoView1.hints.DlvDt.tooltip}"
+                               id="ot30">
+                  <af:convertDateTime pattern="#{pageFlowScope.GLBL_DT_FORMAT} hh:mm:ss"/>
+                </af:outputText>
+              </af:column>
+              <af:column id="c43" headerText="Total CBM" align="right" width="100"
+                         inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }">
+                <af:outputText value="#{row.CbmVal}" shortDesc="#{bindings.TrnpBulkSoView1.hints.CbmVal.tooltip}"
+                               id="ot38">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.TrnpBulkSoView1.hints.CbmVal.format}"
+                                    minFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"
+                                    maxFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.4084']}" id="c25" width="145"
+                         inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }">
+                <af:inputListOfValues id="transRoutTypId"
+                                      popupTitle="#{bundle['LBL.12614']} #{bindings.TrnpBulkSoView1.hints.TransRoutTyp.label}"
+                                      value="#{row.bindings.TransRoutTyp.inputValue}"
+                                      model="#{row.bindings.TransRoutTyp.listOfValuesModel}"
+                                      required="#{bindings.TrnpBulkSoView1.hints.TransRoutTyp.mandatory}"
+                                      columns="#{bindings.TrnpBulkSoView1.hints.TransRoutTyp.displayWidth}"
+                                      shortDesc="#{bindings.TrnpBulkSoView1.hints.TransRoutTyp.tooltip}"
+                                      autoSubmit="true" disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}">
+                  <f:validator binding="#{row.bindings.TransRoutTyp.validator}"/>
+                  <af:autoSuggestBehavior suggestedItems="#{bindings.TransRoutTyp.suggestedItems}"/>
+                </af:inputListOfValues>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.2330']}" id="c3" width="130" rendered="false"
+                         inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }"/>
+              <af:column headerText="Customer Name" id="c2" width="170" rendered="false"
+                         inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }"/>
+              <af:column id="c35" headerText="#{bundle['LBL.18005']}" align="right" width="100" rendered="false"
+                         inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }">
+                <af:outputText value="#{row.TransBalanceWt}"
+                               shortDesc="#{bindings.TrnpBulkSoView1.hints.TransBalanceWt.tooltip}" id="ot31">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.TrnpBulkSoView1.hints.TransBalanceWt.format}"
+                                    minFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"
+                                    maxFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"/>
+                </af:outputText>
+              </af:column>
+              <af:column id="c44" align="right" headerText="Total Bundle"
+                         inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }" width="100">
+                <af:outputText value="#{row.SalesItmQty}"
+                               shortDesc="#{bindings.TrnpBulkSoView1.hints.SalesItmQty.tooltip}" id="ot40">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.TrnpBulkSoView1.hints.SalesItmQty.format}"
+                                    minFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"
+                                    maxFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"/>
+                </af:outputText>
+              </af:column>
+              <af:column id="c45" headerText="Order Value" align="right"
+                         inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }">
+                <af:outputText value="#{row.TotAmtBs}" shortDesc="#{bindings.TrnpBulkSoView1.hints.TotAmtBs.tooltip}"
+                               id="ot41">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.TrnpBulkSoView1.hints.TotAmtBs.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.7307']}" id="c6" width="100" align="right" rendered="false"
+                         inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }">
+                <af:inputText value="#{row.bindings.TransGrossWt.inputValue}"
+                              label="#{bindings.TrnpBulkSoView1.hints.TransGrossWt.label}"
+                              required="#{bindings.TrnpBulkSoView1.hints.TransGrossWt.mandatory}"
+                              columns="#{bindings.TrnpBulkSoView1.hints.TransGrossWt.displayWidth}"
+                              maximumLength="#{bindings.TrnpBulkSoView1.hints.TransGrossWt.precision}"
+                              shortDesc="#{bindings.TrnpBulkSoView1.hints.TransGrossWt.tooltip}" id="it2"
+                              contentStyle="width:79px;" autoSubmit="true" readOnly="true">
+                  <f:validator binding="#{row.bindings.TransGrossWt.validator}"/>
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.TrnpBulkSoView1.hints.TransGrossWt.format}"
+                                    minFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"
+                                    maxFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"/>
+                </af:inputText>
+              </af:column>
+              <af:column id="c32" headerText="#{bundle['LBL.920']}"
+                         rendered="#{pageFlowScope.TrnpBulkVhclReqBean.featureForShippingAddress}"
+                         inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }">
+                <af:inputText value="#{row.bindings.Adds.inputValue}"
+                              label="#{bindings.TrnpBulkSoView1.hints.Adds.label}"
+                              required="#{bindings.TrnpBulkSoView1.hints.Adds.mandatory}"
+                              columns="#{bindings.TrnpBulkSoView1.hints.Adds.displayWidth}"
+                              maximumLength="#{bindings.TrnpBulkSoView1.hints.Adds.precision}"
+                              shortDesc="#{bindings.TrnpBulkSoView1.hints.Adds.tooltip}" id="it6" readOnly="true"
+                              rows="3">
+                  <f:validator binding="#{row.bindings.Adds.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column id="c48" inlineStyle="background:#{(row.ExpFlag == 'Y')  ? '#FA8072' : '#ffffff' }"
+                         visible="false">
+                <af:outputText value="#{row.ExpFlag}" shortDesc="#{bindings.TrnpBulkSoView1.hints.ExpFlag.tooltip}"
+                               id="ot44"/>
+              </af:column>
+            </af:table>
+            <af:table value="#{bindings.SlsTrnpBulkVrSrc1.collectionModel}" var="row"
+                      rows="#{bindings.SlsTrnpBulkVrSrc1.rangeSize}"
+                      emptyText="#{bindings.SlsTrnpBulkVrSrc1.viewable ? bundle['LBL.4595'] : bundle['MSG.2934']}"
+                      rowBandingInterval="0" selectedRowKeys="#{bindings.SlsTrnpBulkVrSrc1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.SlsTrnpBulkVrSrc1.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.SlsTrnpBulkVrSrc1.rangeSize}" id="t5"
+                      inlineStyle="line-height:15px;height:560px;" styleClass="AFStretchWidth" varStatus="vs" autoHeightRows="-1"
+                      contentDelivery="immediate" partialTriggers="::l12"
+                      rendered="#{bindings.SlsTrnpBulkVrSrc1.estimatedRowCount>0 &amp;&amp; (bindings.DocTypId.inputValue eq 2341 ||bindings.DocTypId.inputValue eq 2342)}">
+              <af:column id="c14" width="25" align="center">
+                <af:outputLabel value="#{vs.index+1}." id="ol6" inlineStyle="font-weight:bold;"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.TrnpBulkSoView1trnp.hints.SoId.label}" sortable="true"
+                         headerText="#{bundle['LBL.386']}" id="c15" width="80">
+                <af:outputText value="#{row.TransSoId}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.TransSoId.tooltip}" id="ot10"
+                               inlineStyle="color:maroon;font-weight:bold;"/>
+                <af:outputText value="#{row.SrcDocDt}" shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.SrcDocDt.tooltip}"
+                               id="ot9" inlineStyle="font-weight:bold;">
+                  <af:convertDateTime pattern="#{pageFlowScope.GLBL_DT_FORMAT}"/>
+                </af:outputText>
+                <af:outputText value="#{row.TransEoNm}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.TransEoNm.tooltip}" id="ot11"
+                               inlineStyle="color:blue;font-weight:bold;"
+                               rendered="#{bindings.DocTypId.inputValue ne 915}"/>
+              </af:column>
+              <af:column id="c50" headerText="Warehouse" width="100" rendered="false">
+                <af:outputText value="#{row.TransWhName}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.TransWhName.tooltip}" id="ot46"/>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.7611']}" id="c18" width="119" visible="false">
+                <af:outputText value="#{row.TransVhclTyp}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.TransVhclTyp.tooltip}" id="ot13"/>
+                <af:outputText value="#{row.SrcDocId}" shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.SrcDocId.tooltip}"
+                               id="ot24" visible="false"/>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.4084']}" id="c17" width="91"
+                         rendered="#{bindings.DocTypId.inputValue ne 5237}">
+                <af:outputText value="#{row.TransRoutNm}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.TransRoutNm.tooltip}" id="ot12"
+                               inlineStyle="color:blue; font-weight:bold;"/>
+              </af:column>
+              <af:column id="c62" headerText="Cage Name">
+                <af:outputText value="#{row.bindings.TransCageName.inputValue}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.TransCageName.tooltip}" id="it20"
+                               inlineStyle="color:blue; font-weight:bold;"/>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.4502']}" id="c19" width="80">
+                <af:outputText value="#{row.TransReqTyp}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.TransReqTyp.tooltip}" id="ot22"/>
+                <af:outputText value="#{row.ReqTyp}" shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.ReqTyp.tooltip}"
+                               id="ot48" visible="false"/>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.559']}" id="c23" width="90"
+                         rendered="#{!pageFlowScope.TrnpBulkVhclReqBean.featureForShippingAddress or bindings.DocTypId.inputValue ne 5237}">
+                <af:outputText value="#{row.TransLocNm}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.TransLocNm.tooltip}" id="ot23"
+                               inlineStyle="color:maroon; font-weight:bold;"/>
+              </af:column>
+              <af:column id="c33" headerText="#{bundle['LBL.4635']}"
+                         rendered="#{pageFlowScope.TrnpBulkVhclReqBean.featureForShippingAddress}" width="101">
+                <af:inputText value="#{row.bindings.TransShipAdds.inputValue}" simple="true"
+                              required="#{bindings.SlsTrnpBulkVrSrc1.hints.TransShipAdds.mandatory}"
+                              columns="#{bindings.SlsTrnpBulkVrSrc1.hints.TransShipAdds.displayWidth}"
+                              maximumLength="#{bindings.SlsTrnpBulkVrSrc1.hints.TransShipAdds.precision}"
+                              shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.TransShipAdds.tooltip}" id="it7" rows="3"
+                              readOnly="true">
+                  <f:validator binding="#{row.bindings.TransShipAdds.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.18025']}" id="c13" width="78" inlineStyle="text-align:right;"
+                         rendered="false">
+                <af:outputText value="#{row.GrossWt}" shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.GrossWt.tooltip}"
+                               id="ot8">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SlsTrnpBulkVrSrc1.hints.GrossWt.format}"
+                                    minFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"
+                                    maxFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"/>
+                </af:outputText>
+              </af:column>
+              <af:column id="c36" headerText="#{bundle['LBL.18005']}" align="right" rendered="false">
+                <af:outputText value="#{row.TransBalanceWt}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.TransBalanceWt.tooltip}" id="ot32">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.SlsTrnpBulkVrSrc1.hints.TransBalanceWt.format}"
+                                    minFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"
+                                    maxFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"/>
+                </af:outputText>
+              </af:column>
+              <af:column id="c46" headerText="Total Bundle" align="right" width="78">
+                <af:outputText value="#{row.TotBndl}" shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.TotBndl.tooltip}"
+                               id="ot42">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SlsTrnpBulkVrSrc1.hints.TotBndl.format}"
+                                    minFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"
+                                    maxFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"/>
+                </af:outputText>
+              </af:column>
+              <af:column id="c47" headerText="Order Value" align="right" width="86">
+                <af:outputText value="#{row.TotAmt}" shortDesc="#{bindings.SlsTrnpBulkVrSrc1.hints.TotAmt.tooltip}"
+                               id="ot43">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SlsTrnpBulkVrSrc1.hints.TotAmt.format}"
+                                    minFractionDigits="#{pageFlowScope.GLBL_AMT_DIGIT}"
+                                    maxFractionDigits="#{pageFlowScope.GLBL_AMT_DIGIT}"/>
+                </af:outputText>
+              </af:column>
+              <af:column id="c51" headerText="Vehicle" width="150">
+                <af:inputText value="#{row.bindings.OldVhclNo.inputValue}" simple="true"
+                              required="#{bindings.SlsTrnpBulkVrSrc1.hints.OldVhclNo.mandatory}"
+                              columns="#{bindings.SlsTrnpBulkVrSrc1.hints.OldVhclNo.displayWidth}"
+                              maximumLength="#{bindings.SlsTrnpBulkVrSrc1.hints.OldVhclNo.precision}"
+                              shortDesc="Vehicle Number" id="it15"
+                              visible="#{row.ReqTyp eq 'C' || row.ReqTyp eq 'T'}"
+                              disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}" contentStyle="width:145px;"
+                              autoSubmit="true">
+                  <f:validator binding="#{row.bindings.OldVhclNo.validator}"/>
+                </af:inputText>
+                <af:panelGroupLayout id="pgl16">
+                  <af:inputListOfValues id="vhclNo1Id" popupTitle="Search and Select: #{bindings.VhclNo1.hints.label}"
+                                        value="#{bindings.VhclNo1.inputValue}" label="#{bindings.VhclNo1.hints.label}"
+                                        model="#{bindings.VhclNo1.listOfValuesModel}"
+                                        required="#{bindings.VhclNo1.hints.mandatory}"
+                                        columns="#{bindings.VhclNo1.hints.displayWidth}"
+                                        shortDesc="#{bindings.VhclNo1.hints.tooltip}" contentStyle="width:120px;"
+                                        partialTriggers="::transVhclNoId"
+                                        validator="#{pageFlowScope.TrnpBulkVhclReqBean.vhclNoVldtr}"
+                                        disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}" autoSubmit="true"
+                                        visible="#{row.ReqTyp eq 'C' || row.ReqTyp eq 'I'}">
+                    <f:validator binding="#{bindings.VhclNo1.validator}"/>
+                    <af:autoSuggestBehavior suggestedItems="#{bindings.VhclNo1.suggestedItems}"/>
+                  </af:inputListOfValues>
+                </af:panelGroupLayout>
+                <af:inputListOfValues id="transVhclNameId"
+                                      popupTitle="Search and Select: #{bindings.TransVhclName.hints.label}"
+                                      value="#{bindings.TransVhclName.inputValue}"
+                                      label="#{bindings.TransVhclName.hints.label}"
+                                      model="#{bindings.TransVhclName.listOfValuesModel}"
+                                      required="#{bindings.TransVhclName.hints.mandatory}"
+                                      columns="#{bindings.TransVhclName.hints.displayWidth}"
+                                      shortDesc="#{bindings.TransVhclName.hints.tooltip}" contentStyle="width:150px;"
+                                      disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}" autoSubmit="true"
+                                      rendered="false">
+                  <f:validator binding="#{bindings.TransVhclName.validator}"/>
+                  <af:autoSuggestBehavior suggestedItems="#{bindings.TransVhclName.suggestedItems}"/>
+                </af:inputListOfValues>
+              </af:column>
+              <af:column id="c28" width="30">
+                <af:link id="l11" icon="#{resource['images:enable_delete_blue.png']}"
+                         actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.deleteSalesOrderSrc}"
+                         disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}"
+                         partialTriggers="::sbc2" disabledIcon="#{resource['images:disabled_delete_white.png']}">
+                  <f:attribute name="SoDocId" value="#{row.SrcDocId}"/>
+                </af:link>
+              </af:column>
+            </af:table>
+            <af:table value="#{bindings.TrnpBulkTransferNewVo1.collectionModel}" var="row"
+                      rows="#{bindings.TrnpBulkTransferNewVo1.rangeSize}"
+                      emptyText="#{bindings.TrnpBulkTransferNewVo1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.TrnpBulkTransferNewVo1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.TrnpBulkTransferNewVo1.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.TrnpBulkTransferNewVo1.rangeSize}" id="t9"
+                      inlineStyle="line-height:20px;height:500px;" styleClass="AFStretchWidth" columnStretching="last"
+                      visible="true"
+                      rendered="#{bindings.SlsTrnpBulkVrSrc1.estimatedRowCount&lt;=0 &amp;&amp; bindings.DocTypId.inputValue eq 5237}">
+              <af:column id="c67" align="center">
+                <af:selectBooleanCheckbox value="#{row.bindings.TransDocSelect.inputValue}"
+                                          label="#{row.bindings.TransDocSelect.label}"
+                                          shortDesc="#{bindings.TrnpBulkTransferNewVo1.hints.TransDocSelect.tooltip}"
+                                          id="sbc4" disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}"
+                                          autoSubmit="true"
+                                          valueChangeListener="#{pageFlowScope.TrnpBulkVhclReqBean.ChkSelectBulkTrf}"
+                                          immediate="true"/>
+              </af:column>
+              <af:column headerText="Bulk Transfer Order" id="c63" width="149">
+                <af:outputText value="#{row.TrfNo}" shortDesc="#{bindings.TrnpBulkTransferNewVo1.hints.TrfNo.tooltip}"
+                               id="ot64" inlineStyle="color:maroon;font-weight:bold;"/>
+              </af:column>
+              <af:column headerText="#{bindings.TrnpBulkTransferNewVo1.hints.WhIdDest.label}" id="c64" rendered="false">
+                <af:outputText value="#{row.WhIdDest}"
+                               shortDesc="#{bindings.TrnpBulkTransferNewVo1.hints.WhIdDest.tooltip}" id="ot65"
+                               inlineStyle="font-weight:bold;"/>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.358']}" id="c65">
+                <af:outputText value="#{row.DocDt}" shortDesc="#{bindings.TrnpBulkTransferNewVo1.hints.DocDt.tooltip}"
+                               id="ot66" inlineStyle="font-weight:bold;">
+                  <af:convertDateTime pattern="#{bindings.TrnpBulkTransferNewVo1.hints.DocDt.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="Total Bundle" id="c66">
+                <af:outputText value="#{row.LrBalQty}"
+                               shortDesc="#{bindings.TrnpBulkTransferNewVo1.hints.LrBalQty.tooltip}" id="ot67"
+                               inlineStyle="color:blue; font-weight:bold;">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.TrnpBulkTransferNewVo1.hints.LrBalQty.format}"/>
+                </af:outputText>
+              </af:column>
+            </af:table>
+            <af:table value="#{bindings.SlsTrnpBulkVrSummVO1.collectionModel}" var="row"
+                      rows="#{bindings.SlsTrnpBulkVrSummVO1.rangeSize}"
+                      emptyText="#{bindings.SlsTrnpBulkVrSummVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.SlsTrnpBulkVrSummVO1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.SlsTrnpBulkVrSummVO1.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.SlsTrnpBulkVrSummVO1.rangeSize}" id="t10"
+                      partialTriggers="::l4" varStatus="vs" inlineStyle="line-height:20px;height:560px;"
+                      styleClass="AFStretchWidth" columnStretching="last"
+                      rendered="#{bindings.SlsTrnpBulkVrSrc1.estimatedRowCount>0 &amp;&amp; bindings.DocTypId.inputValue eq 5237}">
+              <af:column id="c82" width="30">
+                <af:outputLabel value="#{vs.index+1}." id="ol8" inlineStyle="font-weight:bold;"/>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.386']}" id="c72" width="150">
+                <af:outputText value="#{row.TransBTONo}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrSummVO1.hints.TransBTONo.tooltip}" id="ot70"
+                               inlineStyle="color:maroon;font-weight:bold;"/>
+              </af:column>
+              <af:column headerText="Cage Name" id="c68" width="180">
+                <af:outputText value="#{row.TransCageName}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrSummVO1.hints.TransCageName.tooltip}" id="ot69"
+                               inlineStyle="color:blue; font-weight:bold;"/>
+              </af:column>
+              <af:column headerText="Vehicle" id="c70">
+                <af:outputText value="#{row.TransVhclNo}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrSummVO1.hints.TransVhclNo.tooltip}" id="ot72"
+                               inlineStyle="font-weight:bold;"/>
+              </af:column>
+            </af:table>
+          </af:panelBox>
+          <af:panelBox text="PanelBox4" id="pb4" showHeader="never" showDisclosure="false" contentStyle="height:40px;">
+            <f:facet name="toolbar"/>
+            <af:panelFormLayout id="pfl2" styleClass="AFStretchWidth PanelForm" inlineStyle="height:39px;padding:7px;"
+                                maxColumns="2" rows="1">
+              <af:inputText value="#{bindings.TransTotalBalanceWt.inputValue}"
+                            required="#{bindings.TransTotalBalanceWt.hints.mandatory}"
+                            columns="#{bindings.TransTotalBalanceWt.hints.displayWidth}"
+                            maximumLength="#{bindings.TransTotalBalanceWt.hints.precision}"
+                            shortDesc="#{bindings.TransTotalBalanceWt.hints.tooltip}" id="it8"
+                            contentStyle="width:150px;padding:2px;border: #b2aeae solid thin;"
+                            labelStyle="font-weight:bold;" disabled="true" label="#{bundle['LBL.18004']} : "
+                            visible="false" rendered="false">
+                <f:validator binding="#{bindings.TransTotalBalanceWt.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.TransTotalBalanceWt.format}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.TransTotalBundle.inputValue}"
+                            label="Total Bundle : "
+                            required="#{bindings.TransTotalBundle.hints.mandatory}"
+                            columns="#{bindings.TransTotalBundle.hints.displayWidth}"
+                            maximumLength="#{bindings.TransTotalBundle.hints.precision}"
+                            shortDesc="#{bindings.TransTotalBundle.hints.tooltip}" id="it13"
+                            disabled="true"
+                            contentStyle="width:150px;padding:2px;border: #b2aeae solid thin;text-align:right;"
+                            labelStyle="font-weight:bold;">
+                <f:validator binding="#{bindings.TransTotalBundle.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.TransTotalBundle.format}"
+                                  minFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"
+                                  maxFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"/>
+              </af:inputText>
+              <af:spacer width="10" height="10" id="s6"/>
+              <af:inputText value="#{bindings.TransTotalAmt.inputValue}" label="Total Amount :"
+                            required="#{bindings.TransTotalAmt.hints.mandatory}"
+                            columns="#{bindings.TransTotalAmt.hints.displayWidth}"
+                            maximumLength="#{bindings.TransTotalAmt.hints.precision}"
+                            shortDesc="#{bindings.TransTotalAmt.hints.tooltip}" id="it14"
+                            contentStyle="width:150px;padding:2px;border: #b2aeae solid thin;text-align:right;"
+                            labelStyle="font-weight:bold;" disabled="true">
+                <f:validator binding="#{bindings.TransTotalAmt.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.TransTotalAmt.format}"
+                                  minFractionDigits="#{pageFlowScope.GLBL_AMT_DIGIT}"
+                                  maxFractionDigits="#{pageFlowScope.GLBL_AMT_DIGIT}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.TransTotalGrossWt.inputValue}" label="#{bundle['LBL.17834']} : "
+                            required="#{bindings.TransTotalGrossWt.hints.mandatory}"
+                            columns="#{bindings.TransTotalGrossWt.hints.displayWidth}"
+                            maximumLength="#{bindings.TransTotalGrossWt.hints.precision}"
+                            shortDesc="#{bindings.TransTotalGrossWt.hints.tooltip}" id="it3"
+                            contentStyle="width:150px;padding:2px;border: #b2aeae solid thin;"
+                            labelStyle="font-weight:bold;" disabled="true" inlineStyle="text-align:right;"
+                            visible="false" rendered="false">
+                <f:validator binding="#{bindings.TransTotalGrossWt.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.TransTotalGrossWt.format}"/>
+              </af:inputText>
+            </af:panelFormLayout>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="second">
+        <af:panelGroupLayout id="pgl6" layout="vertical">
+          <af:panelBox text=" " id="pb6" contentStyle="height:610px;" showDisclosure="false" showHeader="never"
+                       rendered="#{bindings.SlsTrnpBulkVrSrc1.estimatedRowCount&lt;=0}">
+            <f:facet name="toolbar"/>
+            <af:panelGroupLayout id="pgl7" layout="vertical" inlineStyle="padding:4px;border: #b2aeae solid thin;">
+              <af:panelGroupLayout id="pgl8" layout="horizontal">
+                <af:outputLabel value="#{bundle['LBL.17829']} :" id="ol7"
+                                inlineStyle="color:#800000;padding:2px;font-weight:bold;"/>
+                <af:spacer width="310" height="10" id="s11"/>
+                <af:link text="#{bundle['LBL.3776']}" id="l4"
+                         inlineStyle="color: white;     font-weight: bold;     padding: 3px;     background-color: orange;     text-decoration: none;     margin: 5px;"
+                         actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.populateItmDetailAL}"
+                         disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'||  bindings.Freeze1.inputValue eq 'Y'}"
+                         partialTriggers="sbc2"/>
+              </af:panelGroupLayout>
+            </af:panelGroupLayout>
+            <af:separator id="s10"/>
+            <af:table var="row" rowBandingInterval="0" id="t6" value="#{pageFlowScope.TrnpBulkVhclReqBean.soBulkList}"
+                      varStatus="vs" inlineStyle="line-height:20px;height:563px;" autoHeightRows="-1"
+                      styleClass="AFStretchWidth" contentDelivery="immediate"
+                      rendered="#{bindings.DocTypId.inputValue eq 2341 or bindings.DocTypId.inputValue eq 2342}">
+              <af:column sortable="false" headerText="#{bundle['LBL.2329']}" id="c4" width="100">
+                <af:outputText value="#{row.soId}" id="ot14" inlineStyle="color:maroon;font-weight:bold;"/>
+              </af:column>
+              <af:column id="c16" headerText="#{bundle['LBL.299']}" width="325">
+                <af:outputText value="#{row.customer}" id="ot15" inlineStyle="color:blue;font-weight:bold;"/>
+              </af:column>
+              <af:column id="c20" headerText="#{bundle['LBL.4502']}" width="120">
+                <af:outputText value="#{row.reqNm}" id="ot16"/>
+              </af:column>
+              <af:column id="c21" headerText="#{bundle['LBL.7611']}" width="100" rendered="false">
+                <af:outputText value="#{row.vhclNm}" id="ot17"/>
+              </af:column>
+              <af:column id="c22" headerText="#{bundle['LBL.4084']}" width="101">
+                <af:outputText value="#{row.routeNm}" id="ot18"/>
+              </af:column>
+            </af:table>
+            <af:table var="row" rowBandingInterval="0" id="t8" value="#{pageFlowScope.TrnpBulkVhclReqBean.trfBulkList}"
+                      varStatus="vs" inlineStyle="line-height:20px;height:563px;" styleClass="AFStretchWidth"
+                      columnStretching="last" rendered="#{bindings.DocTypId.inputValue eq 5237}">
+              <af:column sortable="false" headerText="#{bundle['LBL.2329']}" id="c57">
+                <af:outputText value="#{row.trfId}" id="ot58" inlineStyle="color:blue;font-weight:bold;"/>
+              </af:column>
+              <af:column sortable="false" headerText="#{bundle['LBL.358']}" id="c58">
+                <af:outputText value="#{row.docDt}" id="ot60" inlineStyle="color:maroon;font-weight:bold;"/>
+              </af:column>
+              <af:column sortable="false" headerText="Warehouse" id="c59" width="149"
+                         rendered="#{bindings.TrfType.inputValue==5238}">
+                <af:outputText value="#{row.whId}" id="ot61" inlineStyle="color:maroon;font-weight:bold;"/>
+              </af:column>
+              <af:column sortable="false" headerText="Total Bundle" id="c60">
+                <af:outputText value="#{row.trfQty}" id="ot62" inlineStyle="color:maroon;font-weight:bold;"/>
+              </af:column>
+              <af:column id="c61" headerText="#{bundle['LBL.4502']}">
+                <af:outputText value="#{row.reqNm}" id="ot63" inlineStyle="color:maroon;font-weight:bold;"/>
+              </af:column>
+            </af:table>
+          </af:panelBox>
+          <af:panelBox text="PanelBox2" id="pb2" showDisclosure="false" showHeader="never" styleClass="AFStretchWidth"
+                       contentStyle="height:610px;" rendered="#{bindings.SlsTrnpBulkVrSrc1.estimatedRowCount>0}">
+            <f:facet name="toolbar"/>
+            <af:panelGroupLayout id="pgl2" layout="vertical" styleClass="AFStretchWidth LeftHeader">
+              <af:panelGroupLayout id="pgl5" layout="horizontal">
+                <af:outputLabel value="#{bundle['LBL.2008']}" id="ol3"/>
+                <af:spacer width="5" height="10" id="s4"/>
+                <af:inputDate value="#{bindings.TransSchlDt.inputValue}"
+                              required="#{bindings.TransSchlDt.hints.mandatory}"
+                              columns="#{bindings.TransSchlDt.hints.displayWidth}"
+                              shortDesc="#{bindings.TransSchlDt.hints.tooltip}" id="id5" contentStyle="width:100px;"
+                              autoSubmit="true" minValue="#{bindings.TransCurDt.inputValue}"
+                              disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}">
+                  <f:validator binding="#{bindings.TransSchlDt.validator}"/>
+                  <af:convertDateTime pattern="#{pageFlowScope.GLBL_DT_FORMAT}"/>
+                </af:inputDate>
+                <af:link id="l18" actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.updateSchlDtAL}"
+                         text="Schedule Date"
+                         inlineStyle="color: white;     font-weight: bold;     padding: 3px;     background-color: orange;     text-decoration: none;     margin: 5px;"
+                         disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}"/>
+                <af:link text="Refresh Stock" id="l21"
+                         inlineStyle="color: white;     font-weight: bold;     padding: 3px;     background-color: orange;     text-decoration: none;     margin: 5px;"
+                         actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.refrshStkACL}"
+                         disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}"/>
+                <af:inputDate value="#{bindings.TransCurDt.inputValue}"
+                              required="#{bindings.TransCurDt.hints.mandatory}"
+                              columns="#{bindings.TransCurDt.hints.displayWidth}"
+                              shortDesc="#{bindings.TransCurDt.hints.tooltip}" id="id6" contentStyle="width:70px;"
+                              visible="false">
+                  <f:validator binding="#{bindings.TransCurDt.validator}"/>
+                  <af:convertDateTime pattern="#{pageFlowScope.GLBL_DT_FORMAT}"/>
+                </af:inputDate>
+              </af:panelGroupLayout>
+            </af:panelGroupLayout>
+            <af:separator id="s5"/>
+            <af:table value="#{bindings.SlsTrnpBulkVrItm1.collectionModel}" var="row"
+                      rows="#{bindings.SlsTrnpBulkVrItm1.rangeSize}"
+                      emptyText="#{bindings.SlsTrnpBulkVrItm1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0" selectedRowKeys="#{bindings.SlsTrnpBulkVrItm1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.SlsTrnpBulkVrItm1.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.SlsTrnpBulkVrItm1.rangeSize}" id="t4"
+                      inlineStyle="line-height:20px;height:563px;" contentDelivery="immediate" autoHeightRows="-1"
+                      styleClass="AFStretchWidth" varStatus="vs"
+                      rendered="#{bindings.DocTypId.inputValue eq 2341 or bindings.DocTypId.inputValue eq 2342}">
+              <af:column id="c42" width="30" visible="#{pageFlowScope.TrnpBulkVhclReqBean.mode  ne 'V'}"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItm1.hints.ItmFlag.name}" headerText="">
+                <af:selectBooleanCheckbox value="#{row.bindings.ItmFlag.inputValue}"
+                                          label="#{row.bindings.ItmFlag.label}"
+                                          shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.ItmFlag.tooltip}" id="sbc5"
+                                          disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}"
+                                          partialTriggers="l16 l17" autoSubmit="true"/>
+                <f:facet name="header">
+                  <af:panelGroupLayout id="pgl11" layout="vertical">
+                    <af:link id="l16" icon="#{resource['images:enable_check_red.png']}"
+                             actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.selectAllItemAL}"
+                             disabledIcon="#{resource['images:disable_select_all.png']}"
+                             disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}"/>
+                    <af:link id="l17" icon="#{resource['images:enable_uncheck_red.png']}"
+                             actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.deSelectAllItemAL}"
+                             disabledIcon="#{resource['images:disable_unselect_all.png']}"
+                             disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}"/>
+                  </af:panelGroupLayout>
+                </f:facet>
+                <af:inputText value="#{row.bindings.ItmFlag.inputValue}"
+                              label="#{bindings.SlsTrnpBulkVrItm1.hints.ItmFlag.label}"
+                              required="#{bindings.SlsTrnpBulkVrItm1.hints.ItmFlag.mandatory}"
+                              columns="#{bindings.SlsTrnpBulkVrItm1.hints.ItmFlag.displayWidth}"
+                              maximumLength="#{bindings.SlsTrnpBulkVrItm1.hints.ItmFlag.precision}"
+                              shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.ItmFlag.tooltip}" id="it18"
+                              rendered="false">
+                  <f:validator binding="#{row.bindings.ItmFlag.validator}"/>
+                </af:inputText>
+                <af:selectBooleanCheckbox value="#{row.bindings.TransItemSelected.inputValue}"
+                                          label="#{row.bindings.TransItemSelected.label}"
+                                          shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.TransItemSelected.tooltip}"
+                                          id="sbc6" visible="false" autoSubmit="true"/>
+              </af:column>
+              <af:column id="c7" width="30" align="center" visible="#{pageFlowScope.TrnpBulkVhclReqBean.mode  == 'V'}"
+                         sortable="true">
+                <af:outputLabel value="#{vs.index+1}." id="ol5" inlineStyle="font-weight:bold;"/>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.528']}" id="c10" width="160"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItm1.hints.TransItmNm.name}" sortable="true">
+                <af:outputText value="#{row.TransItmNm}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.TransItmNm.tooltip}" id="ot6"
+                               inlineStyle="color:blue; font-weight:bold;"/>
+              </af:column>
+              <af:column id="c41" headerText="#{bundle['LBL.12516']}" width="90"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItm1.hints.TransColorAttNm.name}" sortable="true">
+                <af:outputText value="#{row.TransColorAttNm}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.TransColorAttNm.tooltip}" id="ot37"
+                               inlineStyle="color:blue; font-weight:bold;"/>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.1943']}" id="c11" width="80"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItm1.hints.TransUomNm.name}" sortable="true">
+                <af:outputText value="#{row.TransUomNm}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.TransUomNm.tooltip}" id="ot7"
+                               inlineStyle="color:blue; font-weight:bold;"/>
+              </af:column>
+              <af:column id="c30" visible="false" headerText="" rendered="false"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItm1.hints.DlvQty.name}" sortable="true">
+                <af:outputText value="#{row.DlvQty}" shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.DlvQty.tooltip}"
+                               id="ot27">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SlsTrnpBulkVrItm1.hints.DlvQty.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.2461']}" id="c8" width="56" align="right"
+                         inlineStyle="text-align:right;" sortProperty="#{bindings.SlsTrnpBulkVrItm1.hints.TotQty.name}"
+                         sortable="true">
+                <af:inputText value="#{row.bindings.TotQty.inputValue}"
+                              label="#{bindings.SlsTrnpBulkVrItm1.hints.TotQty.label}"
+                              required="#{bindings.SlsTrnpBulkVrItm1.hints.TotQty.mandatory}"
+                              columns="#{bindings.SlsTrnpBulkVrItm1.hints.TotQty.displayWidth}"
+                              maximumLength="#{bindings.SlsTrnpBulkVrItm1.hints.TotQty.precision}"
+                              shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.TotQty.tooltip}" id="it5"
+                              contentStyle="width:79px;"
+                              disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}"
+                              partialTriggers="::sbc2" autoSubmit="true"
+                              validator="#{pageFlowScope.TrnpBulkVhclReqBean.totStkVldtr}"
+                              inlineStyle="text-align:right;">
+                  <f:attribute name="avlblQty" value="#{row.TransAvlblStk}"/>
+                  <f:attribute name="dlvQty" value="#{row.DlvQty}"/>
+                  <f:validator binding="#{row.bindings.TotQty.validator}"/>
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SlsTrnpBulkVrItm1.hints.TotQty.format}"/>
+                </af:inputText>
+              </af:column>
+              <af:column id="c29" headerText="#{bundle['MSG.701']}" width="95" inlineStyle="text-align:right;"
+                         align="right" sortProperty="#{bindings.SlsTrnpBulkVrItm1.hints.AvlStk.name}" sortable="true">
+                <af:outputText value="#{row.AvlStk}" shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.AvlStk.tooltip}"
+                               id="ot28" inlineStyle="color:blue; font-weight:bold;">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SlsTrnpBulkVrItm1.hints.AvlStk.format}"/>
+                </af:outputText>
+                <af:outputText value="#{row.AvlStk}" shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.AvlStk.tooltip}"
+                               id="ot26" rendered="false">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SlsTrnpBulkVrItm1.hints.AvlStk.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column id="c37" headerText="#{bundle['LBL.18002']}" align="right" width="95"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItm1.hints.UnpstdStk.name}" sortable="true">
+                <af:outputText value="#{row.UnpstdStk}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.UnpstdStk.tooltip}" id="ot50">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.SlsTrnpBulkVrItm1.hints.UnpstdStk.format}"/>
+                </af:outputText>
+                <af:outputText value="#{row.UnpstdStk}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.UnpstdStk.tooltip}" id="ot33"
+                               rendered="false">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.SlsTrnpBulkVrItm1.hints.UnpstdStk.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column id="c40" align="right" headerText="#{bundle['LBL.6010']}"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItm1.hints.WipStk.name}" sortable="true">
+                <af:outputText value="#{row.WipStk}" shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.WipStk.tooltip}"
+                               id="ot51">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SlsTrnpBulkVrItm1.hints.WipStk.format}"/>
+                </af:outputText>
+                <af:outputText value="#{row.WipStk}" shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.WipStk.tooltip}"
+                               id="ot36" rendered="false">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SlsTrnpBulkVrItm1.hints.WipStk.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortable="true" headerText="#{bundle['LBL.358']}" id="c12" width="80"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItm1.hints.DlvDt.name}">
+                <af:outputText value="#{row.DlvDt}" shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.DlvDt.tooltip}"
+                               id="ot3">
+                  <af:convertDateTime pattern="#{bindings.SlsTrnpBulkVrItm1.hints.DlvDt.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column id="c39" headerText="Schdl. Date"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItm1.hints.SchdlDt.name}" sortable="true">
+                <af:inputDate value="#{row.bindings.SchdlDt.inputValue}"
+                              required="#{bindings.SlsTrnpBulkVrItm1.hints.SchdlDt.mandatory}"
+                              columns="#{bindings.SlsTrnpBulkVrItm1.hints.SchdlDt.displayWidth}"
+                              shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.SchdlDt.tooltip}" id="id4"
+                              minValue="#{row.DlvDt}"
+                              disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}">
+                  <f:validator binding="#{row.bindings.SchdlDt.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.SlsTrnpBulkVrItm1.hints.SchdlDt.format}"/>
+                </af:inputDate>
+              </af:column>
+              <af:column id="c38" headerText="#{bundle['LBL.18003']}" align="right" visible="false"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItm1.hints.TransBalanceStk.name}" sortable="true">
+                <af:outputText value="#{row.TransBalanceStk}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.TransBalanceStk.tooltip}" id="ot34">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.SlsTrnpBulkVrItm1.hints.TransBalanceStk.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column id="c31" headerText="#{bundle['LBL.12393']}" inlineStyle="text-align:right;" align="right"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItm1.hints.ItmCbm.name}" sortable="true">
+                <af:outputText value="#{row.ItmCbm}" shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.ItmCbm.tooltip}"
+                               id="ot52">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SlsTrnpBulkVrItm1.hints.ItmCbm.format}"
+                                    minFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"
+                                    maxFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"/>
+                </af:outputText>
+                <af:outputText value="#{row.ItmCbm}" shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.ItmCbm.tooltip}"
+                               id="ot29" rendered="false">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SlsTrnpBulkVrItm1.hints.ItmCbm.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.12583']}" id="c9" width="130"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItm1.hints.TransWareHouse.name}" sortable="true">
+                <af:outputText value="#{row.TransWareHouse}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrItm1.hints.TransWareHouse.tooltip}" id="ot5"/>
+              </af:column>
+              <af:column id="c26" width="40" sortable="true">
+                <af:link id="l10" icon="#{resource['images:enable_delete_blue.png']}"
+                         disabledIcon="#{resource['images:disabled_delete_white.png']}"
+                         actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.deleteBulkItemsAL}"
+                         disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}"
+                         partialTriggers="::sbc2" immediate="true"/>
+              </af:column>
+            </af:table>
+            <af:table value="#{bindings.SlsTrnpBulkVrItmVO2.collectionModel}" var="row"
+                      rows="#{bindings.SlsTrnpBulkVrItmVO2.rangeSize}"
+                      emptyText="#{bindings.SlsTrnpBulkVrItmVO2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.SlsTrnpBulkVrItmVO2.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.SlsTrnpBulkVrItmVO2.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.SlsTrnpBulkVrItmVO2.rangeSize}" id="t11"
+                      inlineStyle="line-height:20px;height:563px;" styleClass="AFStretchWidth" varStatus="vs"
+                      rendered="#{bindings.DocTypId.inputValue eq 5237}">
+              <af:column id="c79" headerText="" align="center" width="80"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItmVO2.hints.TransItemSelected.name}" sortable="true"
+                         visible="#{pageFlowScope.TrnpBulkVhclReqBean.mode  ne 'V'}">
+                <af:selectBooleanCheckbox value="#{bindings.ItmFlag1.inputValue}"
+                                          label="#{bindings.ItmFlag1.label}"
+                                          shortDesc="#{bindings.SlsTrnpBulkVrItmVO2.hints.ItmFlag.tooltip}" id="sbc7"
+                                          autoSubmit="true"
+                                          disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}" partialTriggers="l27 l26"
+                                          rendered="false"/>
+                <af:selectBooleanCheckbox id="sbc3" value="#{row.bindings.TransItemSelected.inputValue}"
+                                          label="#{row.bindings.TransItemSelected.label}" autoSubmit="true"
+                                          disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}"
+                                          immediate="true" rendered="false"/>
+                <f:facet name="header">
+                  <af:panelGroupLayout id="pgl15" layout="vertical">
+                    <af:link id="l26" icon="#{resource['images:enable_check_red.png']}"
+                             actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.SelectAllVrItm}"
+                             disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}"
+                             disabledIcon="#{resource['images:disable_select_all.png']}"/>
+                    <af:link id="l27" icon="#{resource['images:enable_uncheck_red.png']}"
+                             actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.deSelectAllVrItm}"
+                             disabledIcon="#{resource['images:disable_unselect_all.png']}"
+                             disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V'}"/>
+                  </af:panelGroupLayout>
+                </f:facet>
+                <af:inputText value="#{row.bindings.TransItemSelected.inputValue}"
+                              label="#{bindings.SlsTrnpBulkVrItmVO2.hints.TransItemSelected.label}"
+                              required="#{bindings.SlsTrnpBulkVrItmVO2.hints.TransItemSelected.mandatory}"
+                              columns="#{bindings.SlsTrnpBulkVrItmVO2.hints.TransItemSelected.displayWidth}"
+                              maximumLength="#{bindings.SlsTrnpBulkVrItmVO2.hints.TransItemSelected.precision}"
+                              shortDesc="#{bindings.SlsTrnpBulkVrItmVO2.hints.TransItemSelected.tooltip}" id="it19"
+                              rendered="false">
+                  <f:validator binding="#{row.bindings.TransItemSelected.validator}"/>
+                </af:inputText>
+                <af:selectBooleanCheckbox value="#{row.bindings.TransItemSelectChk.inputValue}"
+                                          label="#{row.bindings.TransItemSelectChk.label}"
+                                          shortDesc="#{bindings.SlsTrnpBulkVrItmVO2.hints.TransItemSelectChk.tooltip}"
+                                          id="sbc8" autoSubmit="true" immediate="true"
+                                          disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}"
+                                          partialTriggers="l26 l27"/>
+              </af:column>
+              <af:column id="c85" align="center" width="30" sortable="true">
+                <af:outputLabel value="#{vs.index+1}." id="ol2" inlineStyle="font-weight:bold;"/>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.528']}" id="c75" width="180"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItmVO2.hints.TransItmNm.name}" sortable="true">
+                <af:outputText value="#{row.TransItmNm}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrItmVO2.hints.TransItmNm.tooltip}" id="ot78"
+                               inlineStyle="color:blue; font-weight:bold;"/>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.12516']}" id="c73"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItmVO2.hints.TransColorAttNm.name}" sortable="true">
+                <af:outputText value="#{row.TransColorAttNm}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrItmVO2.hints.TransColorAttNm.tooltip}" id="ot71"
+                               inlineStyle="color:blue; font-weight:bold;"/>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.1943']}" id="c76"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItmVO2.hints.TransUomNm.name}" sortable="true">
+                <af:outputText value="#{row.TransUomNm}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrItmVO2.hints.TransUomNm.tooltip}" id="ot73"
+                               inlineStyle="color:blue; font-weight:bold;"/>
+              </af:column>
+              <af:column id="c77" visible="false" sortProperty="#{bindings.SlsTrnpBulkVrItmVO2.hints.DlvQty.name}"
+                         sortable="true" headerText="">
+                <af:outputText value="#{row.DlvQty}" id="ot74">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SlsTrnpBulkVrItmVO2.hints.DlvQty.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.2461']}" id="c74" width="50" align="right"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItmVO2.hints.TotQty.name}" sortable="true">
+                <af:inputText value="#{row.bindings.TotQty.inputValue}"
+                              shortDesc="#{bindings.SlsTrnpBulkVrItmVO2.hints.TotQty.tooltip}" id="ot76"
+                              label="#{bindings.SlsTrnpBulkVrItmVO2.hints.TotQty.label}" autoSubmit="true"
+                              disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}"
+                              required="#{bindings.SlsTrnpBulkVrItmVO2.hints.TotQty.mandatory}"
+                              columns="#{bindings.SlsTrnpBulkVrItmVO2.hints.TotQty.displayWidth}"
+                              maximumLength="#{bindings.SlsTrnpBulkVrItmVO2.hints.TotQty.precision}"
+                              contentStyle="width:79px;color:blue; font-weight:bold;" inlineStyle="text-align:right;"
+                              styleClass="color:blue; font-weight:bold;"
+                              validator="#{pageFlowScope.TrnpBulkVhclReqBean.TotalQtyVldt}">
+                  <f:validator binding="#{row.bindings.TotQty.validator}"/>
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SlsTrnpBulkVrItmVO2.hints.TotQty.format}"
+                                    minFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"
+                                    maxFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"/>
+                  <f:attribute value="#{row.TransAvlblStk}" name="TransAvlblStk"/>
+                  <f:attribute value="#{row.DlvQty}" name="DlvQty"/>
+                </af:inputText>
+                <af:inputText value="#{row.bindings.DlvQty.inputValue}"
+                              required="#{bindings.SlsTrnpBulkVrItmVO2.hints.DlvQty.mandatory}"
+                              columns="#{bindings.SlsTrnpBulkVrItmVO2.hints.DlvQty.displayWidth}"
+                              maximumLength="#{bindings.SlsTrnpBulkVrItmVO2.hints.DlvQty.precision}"
+                              shortDesc="#{bindings.SlsTrnpBulkVrItmVO2.hints.DlvQty.tooltip}" id="it21"
+                              visible="false">
+                  <f:validator binding="#{row.bindings.DlvQty.validator}"/>
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SlsTrnpBulkVrItmVO2.hints.DlvQty.format}"/>
+                </af:inputText>
+              </af:column>
+              <af:column headerText="#{bundle['MSG.701']}" id="c78" inlineStyle="text-align:right;" align="right"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItmVO2.hints.AvlStk.name}" sortable="true">
+                <af:outputText value="#{row.AvlStk}" id="ot75" inlineStyle="color:blue; font-weight:bold;">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SlsTrnpBulkVrItmVO2.hints.AvlStk.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.358']}" id="c80"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItmVO2.hints.DlvDt.name}" sortable="true">
+                <af:outputText value="#{row.DlvDt}" shortDesc="#{bindings.SlsTrnpBulkVrItmVO2.hints.DlvDt.tooltip}"
+                               id="id7" inlineStyle="color:blue; font-weight:bold;">
+                  <af:convertDateTime pattern="#{bindings.SlsTrnpBulkVrItmVO2.hints.DlvDt.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="Schdl. Date" id="c84" rendered="false"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItmVO2.hints.SchdlDt.name}" sortable="true">
+                <af:inputDate value="#{row.bindings.SchdlDt.inputValue}"
+                              label="#{bindings.SlsTrnpBulkVrItmVO2.hints.SchdlDt.label}"
+                              required="#{bindings.SlsTrnpBulkVrItmVO2.hints.SchdlDt.mandatory}"
+                              columns="#{bindings.SlsTrnpBulkVrItmVO2.hints.SchdlDt.displayWidth}"
+                              shortDesc="#{bindings.SlsTrnpBulkVrItmVO2.hints.SchdlDt.tooltip}" id="id8"
+                              disabled="#{pageFlowScope.TrnpBulkVhclReqBean.mode == 'V' || bindings.Freeze1.inputValue eq 'Y'}">
+                  <f:validator binding="#{row.bindings.SchdlDt.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.SlsTrnpBulkVrItmVO2.hints.SchdlDt.format}"/>
+                </af:inputDate>
+              </af:column>
+              <af:column headerText="#{bundle['LBL.12583']}" id="c81" width="150"
+                         sortProperty="#{bindings.SlsTrnpBulkVrItmVO2.hints.TransWareHouse.name}" sortable="true">
+                <af:outputText value="#{row.TransWareHouse}"
+                               shortDesc="#{bindings.SlsTrnpBulkVrItmVO2.hints.TransWareHouse.tooltip}" id="it26"
+                               inlineStyle="color:blue; font-weight:bold;"/>
+              </af:column>
+            </af:table>
+          </af:panelBox>
+          <af:panelBox text="PanelBox5" id="pb5" showHeader="never" showDisclosure="false" contentStyle="height:40px;">
+            <f:facet name="toolbar"/>
+            <af:panelGroupLayout id="pgl12" layout="horizontal" styleClass="AFStretchWidth PanelForm"
+                                 inlineStyle="height:40px;">
+              <af:inputText value="#{bindings.VrMode.inputValue}" required="#{bindings.VrMode.hints.mandatory}"
+                            columns="#{bindings.VrMode.hints.displayWidth}"
+                            maximumLength="#{bindings.VrMode.hints.precision}"
+                            shortDesc="#{bindings.VrMode.hints.tooltip}" id="it11" visible="false">
+                <f:validator binding="#{bindings.VrMode.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.VrMode.format}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.TransTotalCBM.inputValue}" label="Total CBM"
+                            required="#{bindings.TransTotalCBM.hints.mandatory}"
+                            columns="#{bindings.TransTotalCBM.hints.displayWidth}"
+                            maximumLength="#{bindings.TransTotalCBM.hints.precision}"
+                            shortDesc="#{bindings.TransTotalCBM.hints.tooltip}" id="it9" disabled="true"
+                            contentStyle="width:100px;border: #b2aeae solid thin;text-align:right;" inlineStyle="text-align:right;"
+                            visible="false">
+                <f:validator binding="#{bindings.TransTotalCBM.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.TransTotalCBM.format}"
+                                  minFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"
+                                  maxFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.TransTotalCbmVal.inputValue}"
+                            label="Total CBM : "
+                            required="#{bindings.TransTotalCbmVal.hints.mandatory}"
+                            columns="#{bindings.TransTotalCbmVal.hints.displayWidth}"
+                            maximumLength="#{bindings.TransTotalCbmVal.hints.precision}"
+                            shortDesc="#{bindings.TransTotalCbmVal.hints.tooltip}" id="it16" disabled="true"
+                            contentStyle="width:100px;border: #b2aeae solid thin;text-align:right;"
+                            inlineStyle="text-align:right;" labelStyle="font-weight:bold;">
+                <f:validator binding="#{bindings.TransTotalCbmVal.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.TransTotalCbmVal.format}"
+                                  minFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"
+                                  maxFractionDigits="#{pageFlowScope.GLBL_QTY_DIGIT}"/>
+              </af:inputText>
+              <af:spacer width="180" height="10" id="s7" rendered="true"/>
+              <af:link text="Generate LR and Vehicle Schedule" id="l6"
+                       inlineStyle="color: white;     font-weight: bold;     padding: 3px;     background-color: orange;     text-decoration: none;     margin: 5px;"
+                       actionListener="#{pageFlowScope.TrnpBulkVhclReqBean.generateRequestAL}"
+                       disabled="#{ebizsec['24266A'] or pageFlowScope.TrnpBulkVhclReqBean.mode !='V' || !(bindings.SlsTrnpBulkVrItm1Iterator.estimatedRowCount > 0)}" partialTriggers="sbc2 b1"
+                       visible="#{pageFlowScope.TrnpBulkVhclReqBean.mode=='V' and bindings.VrMode.inputValue eq 2465}"/>
+              <af:link text="Bulk VR Details" id="l19" visible="#{bindings.LrStatus.inputValue eq 2352}"
+                       inlineStyle="color: white;     font-weight: bold;     padding: 3px;     background-color: orange;     text-decoration: none;     margin: 5px;"
+                       rendered="#{bindings.DocTypId.inputValue ne 915}">
+                <af:showPopupBehavior popupId="p1"/>
+              </af:link>
+              <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+                <af:dialog id="d1" type="ok" title="Generated Loading Requests">
+                  <f:facet name="buttonBar"/>
+                  <af:panelFormLayout id="pfl5" styleClass=" AFStretchWidth">
+                    <f:facet name="footer"/>
+                    <af:inputText value="#{bindings.TransLrDtls.inputValue}" simple="true"
+                                  required="#{bindings.TransLrDtls.hints.mandatory}"
+                                  columns="#{bindings.TransLrDtls.hints.displayWidth}"
+                                  maximumLength="#{bindings.TransLrDtls.hints.precision}"
+                                  shortDesc="#{bindings.TransLrDtls.hints.tooltip}" id="it12" rows="4" readOnly="true"
+                                  contentStyle="width:170px;font-weight:bold;size:16px;">
+                      <f:validator binding="#{bindings.TransLrDtls.validator}"/>
+                    </af:inputText>
+                  </af:panelFormLayout>
+                </af:dialog>
+              </af:popup>
+            </af:panelGroupLayout>
+            <af:panelFormLayout id="pfl3" styleClass="AFStretchWidth PanelForm" inlineStyle="padding:11px;"
+                                maxColumns="4" rows="1"/>
+          </af:panelBox>
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:panelSplitter>
+  </af:panelGroupLayout>
+</jsp:root>

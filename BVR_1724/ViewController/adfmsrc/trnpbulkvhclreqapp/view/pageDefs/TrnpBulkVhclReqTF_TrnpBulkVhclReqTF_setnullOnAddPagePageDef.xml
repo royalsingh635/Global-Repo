@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8"
+                id="TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_setnullOnAddPagePageDef"
+                Package="trnpbulkvhclreqapp.view.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="setnullOnAddPage" RequiresUpdateModel="true" Action="invokeMethod" MethodName="setnullOnAddPage"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.setnullOnAddPage_TrnpBulkVhclReqAMDataControl_dataProvider_setnullOnAddPage_result"/>
+  </bindings>
+</pageDefinition>

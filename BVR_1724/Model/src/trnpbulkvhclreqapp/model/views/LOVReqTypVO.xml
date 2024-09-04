@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="LOVReqTypVO"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="trnpbulkvhclreqapp.model.views.LOVReqTypVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="BindAttId"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="LangIdBind"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT NVL(b.ATT_NM,A.ATT_NM ) ATT_NM,   
+DECODE(A.ATT_ID, 1432, 'I', 1433, 'T',1741,'C') Att_id     
+FROM APP.APP$DS$ATT A,   
+APP.APP$DS$ATT$LANG B   
+WHERE A.ATT_ACTV = 'Y'    
+AND A.ATT_TYPE_ID= 295   
+AND A.ATT_ID = B.ATT_ID(+)    
+AND :LangIdBind = B.ATT_LANG_ID(+)   
+and a.att_id = nvl(DECODE(:BindAttId,'T',1433,'I',1432,'C',1741),a.ATT_ID)]]></SQLQuery>
+  <ViewAttribute
+    Name="AttNm"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ATT_NM"
+    Expression="ATT_NM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AttId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="ATT_ID"
+    Expression="ATT_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="trnpbulkvhclreqapp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8"
+                id="TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_rollbackPageDef" Package="trnpbulkvhclreqapp.view.pageDefs"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="rollback" RequiresUpdateModel="true" Action="invokeMethod" MethodName="rollback"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.rollback_TrnpBulkVhclReqAMDataControl_dataProvider_rollback_result"/>
+  </bindings>
+</pageDefinition>

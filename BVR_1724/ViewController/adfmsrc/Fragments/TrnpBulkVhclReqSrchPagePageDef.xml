@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="TrnpBulkVhclReqSrchPagePageDef"
+                Package="Fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SearchParamDual1" RangeSize="25" DataControl="TrnpBulkVhclReqAMDataControl"
+              id="SearchParamDual1Iterator"/>
+    <iterator Binds="SearchBulkLR1" RangeSize="25" DataControl="TrnpBulkVhclReqAMDataControl"
+              id="SearchBulkLR1Iterator"/>
+  </executables>
+  <bindings>
+    <listOfValues IterBinding="SearchParamDual1Iterator" StaticList="false" Uses="LOV_TransDrftDispId"
+                  id="TransDrftDispId" ChangeEventPolicy="none"/>
+    <tree IterBinding="SearchBulkLR1Iterator" id="SearchBulkLR1">
+      <nodeDefinition DefName="trnpbulkvhclreqapp.model.views.SearchBulkLRVO" Name="SearchBulkLR10">
+        <AttrNames>
+          <Item Value="DispId"/>
+          <Item Value="DrftDispId"/>
+          <Item Value="DocDt"/>
+          <Item Value="DocId"/>
+          <Item Value="TransUsrNm"/>
+          <Item Value="Freeze"/>
+          <Item Value="LrStatus"/>
+          <Item Value="AttNm"/>
+          <Item Value="TransDocTypNm"/>
+          <Item Value="TransVrMode"/>
+          <Item Value="CustNm"/>
+          <Item Value="SoIds"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="resetBulkLR" RequiresUpdateModel="true" Action="invokeMethod" MethodName="resetBulkLR"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.resetBulkLR_TrnpBulkVhclReqAMDataControl_dataProvider_resetBulkLR_result"/>
+    <methodAction id="searchBulkLR" RequiresUpdateModel="true" Action="invokeMethod" MethodName="searchBulkLR"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.searchBulkLR_TrnpBulkVhclReqAMDataControl_dataProvider_searchBulkLR_result"/>
+    <attributeValues IterBinding="SearchParamDual1Iterator" id="TransEndDt">
+      <AttrNames>
+        <Item Value="TransEndDt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchParamDual1Iterator" id="TransStDt">
+      <AttrNames>
+        <Item Value="TransStDt"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SearchParamDual1Iterator" StaticList="false" Uses="LOV_TransDocType" id="TransDocType"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="SearchParamDual1Iterator" StaticList="false" Uses="LOV_TransModeNm" id="TransModeNm"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="SearchParamDual1Iterator" StaticList="false" Uses="LOV_TransLrNo" id="TransLrNo"
+                  ChangeEventPolicy="none"/>
+    <listOfValues IterBinding="SearchParamDual1Iterator" StaticList="false" Uses="LOV_TransSchdlNo" id="TransSchdlNo"
+                  ChangeEventPolicy="none"/>
+    <listOfValues IterBinding="SearchParamDual1Iterator" StaticList="false" Uses="LOV_TransSoNo" id="TransSoNo"
+                  ChangeEventPolicy="none"/>
+    <list IterBinding="SearchParamDual1Iterator" StaticList="false" Uses="LOV_TransStatus" id="TransStatus"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="SearchParamDual1Iterator" StaticList="false" Uses="LOV_TransEoNm" id="TransEoNm"
+                  ChangeEventPolicy="none"/>
+    <listOfValues IterBinding="SearchParamDual1Iterator" StaticList="false" Uses="LOV_TransRmaId" id="TransRmaId"/>
+    <attributeValues IterBinding="SearchParamDual1Iterator" id="TransDocTypeId">
+      <AttrNames>
+        <Item Value="TransDocTypeId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

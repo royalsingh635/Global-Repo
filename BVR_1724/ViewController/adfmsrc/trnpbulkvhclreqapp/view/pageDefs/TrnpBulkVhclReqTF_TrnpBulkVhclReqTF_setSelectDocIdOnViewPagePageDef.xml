@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8"
+                id="TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_setSelectDocIdOnViewPagePageDef"
+                Package="trnpbulkvhclreqapp.view.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="setSelectDocIdOnViewPage" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="setSelectDocIdOnViewPage" IsViewObjectMethod="false"
+                  DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.setSelectDocIdOnViewPage_TrnpBulkVhclReqAMDataControl_dataProvider_setSelectDocIdOnViewPage_result"/>
+  </bindings>
+</pageDefinition>

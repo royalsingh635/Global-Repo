@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8"
+                id="TrnpBulkVhclReqTF_TrnpBulkVhclReqTF_getWfNoPageDef" Package="trnpbulkvhclreqapp.view.pageDefs"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="getWfNo" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getWfNo"
+                  IsViewObjectMethod="false" DataControl="TrnpBulkVhclReqAMDataControl"
+                  InstanceName="data.TrnpBulkVhclReqAMDataControl.dataProvider"
+                  ReturnName="data.TrnpBulkVhclReqAMDataControl.methodResults.getWfNo_TrnpBulkVhclReqAMDataControl_dataProvider_getWfNo_result"/>
+  </bindings>
+</pageDefinition>

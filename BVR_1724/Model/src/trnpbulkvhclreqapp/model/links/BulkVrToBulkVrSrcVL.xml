@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BulkVrToBulkVrSrcVL"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="trnpbulkvhclreqapp.model.links.BulkVrToBulkVrSrcVL_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="SlsTrnpBulkVr"
+    Cardinality="1"
+    Source="true"
+    Owner="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrVO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="SlsTrnpBulkVr"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrVO.CldId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrVO.SlocId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrVO.OrgId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrVO.HoOrgId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrVO.DocId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="SlsTrnpBulkVrSrc"
+    Cardinality="-1"
+    Owner="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrSrcVO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="SlsTrnpBulkVrSrc"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrSrcVO.CldId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrSrcVO.SlocId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrSrcVO.OrgId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrSrcVO.HoOrgId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrSrcVO.DocId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="trnpbulkvhclreqapp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

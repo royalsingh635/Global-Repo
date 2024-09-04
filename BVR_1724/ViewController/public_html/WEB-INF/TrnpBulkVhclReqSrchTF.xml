@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="TrnpBulkVhclReqSrchTF">
+    <default-activity>TrnpBulkVhclReqSrchPage</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__18">
+      <name>GLBL_APP_CLD_ID</name>
+      <value>#{pageFlowScope.GLBL_APP_CLD_ID}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__19">
+      <name>GLBL_APP_SERV_LOC</name>
+      <value>#{pageFlowScope.GLBL_APP_SERV_LOC}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__20">
+      <name>GLBL_APP_USR_ORG</name>
+      <value>#{pageFlowScope.GLBL_APP_USR_ORG}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__21">
+      <name>GLBL_HO_ORG_ID</name>
+      <value>#{pageFlowScope.GLBL_HO_ORG_ID}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__22">
+      <name>GLBL_APP_USR</name>
+      <value>#{pageFlowScope.GLBL_APP_USR}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__23">
+      <name>DocId</name>
+      <value>#{pageFlowScope.DocId}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__24">
+      <name>Mode</name>
+      <value>#{pageFlowScope.Mode}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__25">
+      <name>GLBL_DT_FORMAT</name>
+      <value>#{pageFlowScope.GLBL_DT_FORMAT}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__26">
+      <name>GLBL_QTY_DIGIT</name>
+      <value>#{pageFlowScope.GLBL_QTY_DIGIT}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__31">
+      <name>GLBL_LANG_ID</name>
+      <value>#{pageFlowScope.GLBL_LANG_ID}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__34">
+      <name>GLBL_ORG_PROJ_ID</name>
+      <value>#{pageFlowScope.GLBL_ORG_PROJ_ID}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__39">
+      <name>GLBL_AMT_DIGIT</name>
+      <value>#{pageFlowScope.GLBL_AMT_DIGIT}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>searchBulkLRBean</managed-bean-name>
+      <managed-bean-class>trnpbulkvhclreqapp.view.beans.searchBulkLRBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="TrnpBulkVhclReqSrchPage">
+      <page>/Fragments/TrnpBulkVhclReqSrchPage.jsff</page>
+    </view>
+    <task-flow-call id="TrnpBulkVhclReqTF">
+      <task-flow-reference>
+        <document>/WEB-INF/TrnpBulkVhclReqTF.xml</document>
+        <id>TrnpBulkVhclReqTF</id>
+      </task-flow-reference>
+      <input-parameter id="__5">
+        <name>Mode</name>
+        <value>A</value>
+      </input-parameter>
+      <input-parameter id="__6">
+        <name>GLBL_APP_SERV_LOC</name>
+        <value>#{pageFlowScope.GLBL_APP_SERV_LOC}</value>
+      </input-parameter>
+      <input-parameter id="__7">
+        <name>GLBL_APP_USR_ORG</name>
+        <value>#{pageFlowScope.GLBL_APP_USR_ORG}</value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>GLBL_HO_ORG_ID</name>
+        <value>#{pageFlowScope.GLBL_HO_ORG_ID}</value>
+      </input-parameter>
+      <input-parameter id="__9">
+        <name>GLBL_APP_USR</name>
+        <value>#{pageFlowScope.GLBL_APP_USR}</value>
+      </input-parameter>
+      <input-parameter id="__10">
+        <name>GLBL_APP_CLD_ID</name>
+        <value>#{pageFlowScope.GLBL_APP_CLD_ID}</value>
+      </input-parameter>
+      <input-parameter id="__27">
+        <name>GLBL_DT_FORMAT</name>
+        <value>#{pageFlowScope.GLBL_DT_FORMAT}</value>
+      </input-parameter>
+      <input-parameter id="__30">
+        <name>GLBL_QTY_DIGIT</name>
+        <value>#{pageFlowScope.GLBL_QTY_DIGIT}</value>
+      </input-parameter>
+      <input-parameter id="__32">
+        <name>GLBL_LANG_ID</name>
+        <value>#{pageFlowScope.GLBL_LANG_ID}</value>
+      </input-parameter>
+      <input-parameter id="__35">
+        <name>GLBL_ORG_PROJ_ID</name>
+        <value>#{pageFlowScope.GLBL_ORG_PROJ_ID}</value>
+      </input-parameter>
+      <input-parameter id="__37">
+        <name>WF_RET_PARAM</name>
+        <value>-</value>
+      </input-parameter>
+      <input-parameter id="__40">
+        <name>GLBL_AMT_DIGIT</name>
+        <value>#{pageFlowScope.GLBL_AMT_DIGIT}</value>
+      </input-parameter>
+    </task-flow-call>
+    <task-flow-call id="TrnpBulkVhclReqTF1">
+      <task-flow-reference>
+        <document>/WEB-INF/TrnpBulkVhclReqTF.xml</document>
+        <id>TrnpBulkVhclReqTF</id>
+      </task-flow-reference>
+      <input-parameter id="__11">
+        <name>GLBL_APP_CLD_ID</name>
+        <value>#{pageFlowScope.GLBL_APP_CLD_ID}</value>
+      </input-parameter>
+      <input-parameter id="__12">
+        <name>GLBL_APP_SERV_LOC</name>
+        <value>#{pageFlowScope.GLBL_APP_SERV_LOC}</value>
+      </input-parameter>
+      <input-parameter id="__13">
+        <name>GLBL_APP_USR_ORG</name>
+        <value>#{pageFlowScope.GLBL_APP_USR_ORG}</value>
+      </input-parameter>
+      <input-parameter id="__14">
+        <name>GLBL_HO_ORG_ID</name>
+        <value>#{pageFlowScope.GLBL_HO_ORG_ID}</value>
+      </input-parameter>
+      <input-parameter id="__15">
+        <name>GLBL_APP_USR</name>
+        <value>#{pageFlowScope.GLBL_APP_USR}</value>
+      </input-parameter>
+      <input-parameter id="__16">
+        <name>DocId</name>
+        <value>#{pageFlowScope.DocId}</value>
+      </input-parameter>
+      <input-parameter id="__17">
+        <name>Mode</name>
+        <value>V</value>
+      </input-parameter>
+      <input-parameter id="__28">
+        <name>GLBL_DT_FORMAT</name>
+        <value>#{pageFlowScope.GLBL_DT_FORMAT}</value>
+      </input-parameter>
+      <input-parameter id="__29">
+        <name>GLBL_QTY_DIGIT</name>
+        <value>#{pageFlowScope.GLBL_QTY_DIGIT}</value>
+      </input-parameter>
+      <input-parameter id="__33">
+        <name>GLBL_LANG_ID</name>
+        <value>#{pageFlowScope.GLBL_LANG_ID}</value>
+      </input-parameter>
+      <input-parameter id="__36">
+        <name>GLBL_ORG_PROJ_ID</name>
+        <value>#{pageFlowScope.GLBL_ORG_PROJ_ID}</value>
+      </input-parameter>
+      <input-parameter id="__38">
+        <name>WF_RET_PARAM</name>
+        <value>-</value>
+      </input-parameter>
+      <input-parameter id="__41">
+        <name>GLBL_AMT_DIGIT</name>
+        <value>#{pageFlowScope.GLBL_AMT_DIGIT}</value>
+      </input-parameter>
+    </task-flow-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>TrnpBulkVhclReqSrchPage</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>A</from-outcome>
+        <to-activity-id>TrnpBulkVhclReqTF</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__4">
+        <from-outcome>V</from-outcome>
+        <to-activity-id>TrnpBulkVhclReqTF1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

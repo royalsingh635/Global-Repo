@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BulkVrSummToBulkVrItmVL"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="trnpbulkvhclreqapp.model.links.BulkVrSummToBulkVrItmVL_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="SlsTrnpBulkVrSumm"
+    Cardinality="1"
+    Source="true"
+    Owner="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrSummVO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="SlsTrnpBulkVrSumm"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrSummVO.CldId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrSummVO.SlocId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrSummVO.OrgId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrSummVO.HoOrgId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrSummVO.DocId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrSummVO.BtoDocId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="SlsTrnpBulkVrItm"
+    Cardinality="-1"
+    Owner="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrItmVO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="SlsTrnpBulkVrItm"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrItmVO.CldId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrItmVO.SlocId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrItmVO.OrgId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrItmVO.HoOrgId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrItmVO.DocId"/>
+      <Item Value="trnpbulkvhclreqapp.model.views.SlsTrnpBulkVrItmVO.BtoDocId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="trnpbulkvhclreqapp.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>
