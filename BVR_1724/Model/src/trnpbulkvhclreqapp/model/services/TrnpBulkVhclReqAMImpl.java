@@ -3138,6 +3138,7 @@ public class TrnpBulkVhclReqAMImpl
     ArrayList al = new ArrayList();
     try
     {
+        /** Test remark **/
       st =
         getDBTransaction().createCallableStatement("begin " + "SLS.PROC_WMS_BVR_NOT_INFO(?,?,?,?,?,?,?)" + ";end;", 0);
       for (ProcPrams p: params)
